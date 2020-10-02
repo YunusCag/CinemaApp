@@ -31,5 +31,29 @@
         android:id="@+id/homeScreenFragment"
         android:name="com.yunuscagliyan.sinemalog.ui.home.HomeScreenFragment"
         android:label="fragment_home_screen"
-        tools:layout="@layout/fragment_home_screen" />
+        tools:layout="@layout/fragment_home_screen" >
+        <action
+            android:id="@+id/popular_view_all"
+            app:destination="@id/popularMovieFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/trending_view_all"
+            app:destination="@id/trendingMovieFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/popularMovieFragment"
+        android:name="com.yunuscagliyan.sinemalog.ui.popular.PopularMovieFragment"
+        android:label="Popular Movie"
+        tools:layout="@layout/fragment_popular_movie" />
+    <fragment
+        android:id="@+id/trendingMovieFragment"
+        android:name="com.yunuscagliyan.sinemalog.ui.trending.TrendingMovieFragment"
+        android:label="Trending Movie" />
 </navigation>

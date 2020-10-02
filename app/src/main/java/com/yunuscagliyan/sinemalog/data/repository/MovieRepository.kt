@@ -6,6 +6,7 @@ import androidx.paging.liveData
 import com.yunuscagliyan.sinemalog.data.api.POST_PER_PAGE
 import com.yunuscagliyan.sinemalog.data.api.TheMovieDBInterface
 import com.yunuscagliyan.sinemalog.data.source.PopularDataSource
+import com.yunuscagliyan.sinemalog.data.source.TrendingDataSource
 import com.yunuscagliyan.sinemalog.data.source.UpComingDataSource
 import javax.inject.Inject
 
@@ -29,6 +30,16 @@ class MovieRepository @Inject constructor(
         ),
         pagingSourceFactory = {
             PopularDataSource(theMovieDBInterface)
+        }
+    ).liveData
+
+    fun getTrendingMovie()=Pager(
+        config = PagingConfig(
+            pageSize = POST_PER_PAGE,
+            enablePlaceholders = false
+        ),
+        pagingSourceFactory = {
+            TrendingDataSource(theMovieDBInterface)
         }
     ).liveData
 }

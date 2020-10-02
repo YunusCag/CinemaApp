@@ -2,8 +2,10 @@ package com.yunuscagliyan.sinemalog
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.yunuscagliyan.sinemalog.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,5 +25,10 @@ class MainActivity : AppCompatActivity() {
     private fun initUI() {
         val navHostFragment=supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController=navHostFragment.navController
+    }
+
+    fun setUpToolbar(toolbar: Toolbar){
+        setSupportActionBar(toolbar)
+        NavigationUI.setupWithNavController(toolbar,navController)
     }
 }

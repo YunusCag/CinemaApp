@@ -11,7 +11,6 @@ import com.yunuscagliyan.sinemalog.R
 import com.yunuscagliyan.sinemalog.data.api.POSTER_BASE_URL
 import com.yunuscagliyan.sinemalog.data.models.Movie
 import com.yunuscagliyan.sinemalog.databinding.ItemMovieBinding
-import com.yunuscagliyan.sinemalog.databinding.ItemUpComingMovieBinding
 
 class MovieAdapter : PagingDataAdapter<Movie, MovieAdapter.MovieViewHolder>(MOVIE_COMPARATOR) {
 
