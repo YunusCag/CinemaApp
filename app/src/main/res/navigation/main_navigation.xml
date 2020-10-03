@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/destination_home"
         android:name="com.yunuscagliyan.sinemalog.ui.home.HomeScreenFragment"
-        android:label="Home Page"
+        android:label="@string/home_page"
         tools:layout="@layout/fragment_home_screen">
         <action
             android:id="@+id/popular_view_all"
@@ -38,7 +38,7 @@
     <fragment
         android:id="@+id/destination_popular"
         android:name="com.yunuscagliyan.sinemalog.ui.popular.PopularMovieFragment"
-        android:label="Popular Movie"
+        android:label="@string/popular_movie"
         tools:layout="@layout/fragment_popular_movie" >
         <action
             android:id="@+id/action_movie_detail"
@@ -47,7 +47,7 @@
     <fragment
         android:id="@+id/destination_trending"
         android:name="com.yunuscagliyan.sinemalog.ui.trending.TrendingMovieFragment"
-        android:label="Trending Movie" >
+        android:label="@string/trending_movie" >
         <action
             android:id="@+id/action_movie_detail"
             app:destination="@id/movieDetailFragment" />
@@ -69,6 +69,6 @@
     <fragment
         android:id="@+id/destination_setting"
         android:name="com.yunuscagliyan.sinemalog.ui.setting.SettingFragment"
-        android:label="Settings"
+        android:label="@string/settings"
         tools:layout="@layout/fragment_setting" />
 </navigation>

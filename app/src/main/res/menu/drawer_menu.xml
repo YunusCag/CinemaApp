@@ -7,16 +7,16 @@
             android:id="@+id/destination_home"
             android:checkable="true"
             android:icon="@drawable/movie_icon"
-            android:title="Home Page" />
+            android:title="@string/home_page" />
         <item
             android:id="@+id/destination_trending"
             android:checkable="true"
             android:icon="@drawable/cinema_icon"
-            android:title="Trending Movie"/>
+            android:title="@string/trending_movie"/>
         <item android:id="@+id/destination_popular"
             android:checkable="true"
             android:icon="@drawable/tv_icon"
-            android:title="Popular Movie"/>
+            android:title="@string/popular_movie"/>
     </group>
     <group
         android:id="@+id/menu_bottom"
@@ -25,6 +25,6 @@
             android:id="@+id/destination_setting"
             android:checkable="true"
             android:icon="@drawable/ic_settings_black"
-            android:title="Settings" />
+            android:title="@string/settings" />
     </group>
 </menu>

@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="Up Coming Movie"
+                    android:text="@string/up_coming_movie"
                     android:textColor="@color/titleTextColor"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
-                    android:text="View All"
+                    android:text="@string/view_all"
                     android:textColor="@color/titleTextColor"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -87,7 +87,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="Trending Movie"
+                    android:text="@string/trending_movie"
                     android:textColor="@color/titleTextColor"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
-                    android:text="View All"
+                    android:text="@string/view_all"
                     android:textColor="@color/titleTextColor"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -122,7 +122,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="Popular Movie"
+                    android:text="@string/popular_movie"
                     android:textColor="@color/titleTextColor"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -133,7 +133,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
-                    android:text="View All"
+                    android:text="@string/view_all"
                     android:textColor="@color/titleTextColor"
                     android:textSize="16sp"
                     android:textStyle="bold" />

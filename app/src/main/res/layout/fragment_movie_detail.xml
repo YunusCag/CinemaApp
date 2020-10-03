@@ -88,16 +88,16 @@
                     android:id="@+id/tv_movie_time"
                     android:layout_width="wrap_content"
                     android:padding="4dp"
-                    android:drawableLeft="@drawable/ic_time_lapse"
                     android:text="120"
                     android:drawablePadding="2dp"
                     android:layout_marginStart="10dp"
                     android:textSize="16sp"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    app:drawableStartCompat="@drawable/ic_time_lapse" />
                 <TextView
                     android:layout_weight="3"
-                    android:textColor="@android:color/black"
-                    android:text="minutes"
+                    android:textColor="@color/titleTextColor"
+                    android:text="@string/minutes"
                     android:layout_marginStart="2dp"
                     android:textSize="16sp"
                     android:layout_width="wrap_content"
@@ -105,9 +105,9 @@
 
                 <TextView
                     android:layout_weight="1"
-                    android:text="Release Date:"
+                    android:text="@string/release_date"
                     android:textSize="16sp"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/titleTextColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -126,7 +126,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:text="Overview"
+                    android:text="@string/overview"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:paddingStart="5dp"
