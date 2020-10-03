@@ -3,18 +3,21 @@ package com.yunuscagliyan.sinemalog.ui.home
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
+import com.yunuscagliyan.sinemalog.MainActivity
 import com.yunuscagliyan.sinemalog.R
 import com.yunuscagliyan.sinemalog.databinding.FragmentHomeScreenBinding
 import com.yunuscagliyan.sinemalog.ui.adapters.HomeLoadStateAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
@@ -40,6 +43,7 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
     }
 
     private fun initUI() {
+        (activity as MainActivity).setUpToolbar(binding.toolbar)
         initUpComingMovies()
         initPopularMovie()
         initTrendingMovies()
@@ -73,9 +77,13 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
     private fun initPopularMovie() {
         this.popularAdapter = MovieAdapter()
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        postponeEnterTransition(250, TimeUnit.MILLISECONDS)
         binding.apply {
             rvPopularMovie.setHasFixedSize(true)
             rvPopularMovie.layoutManager = layoutManager
+            rvPopularMovie.doOnPreDraw {
+                startPostponedEnterTransition()
+            }
             rvPopularMovie.adapter = popularAdapter.withLoadStateHeaderAndFooter(
                 header = HomeLoadStateAdapter{popularAdapter.retry()},
                 footer = HomeLoadStateAdapter{popularAdapter.retry()}
@@ -89,16 +97,20 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
         upComingAdapter = UpComingAdapter()
         binding.apply {
             val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            postponeEnterTransition(250,TimeUnit.MILLISECONDS)
             val snapHelper = PagerSnapHelper()
             snapHelper.attachToRecyclerView(rvUpComingMovie)
             rvUpComingMovie.setHasFixedSize(true)
+            rvUpComingMovie.doOnPreDraw {
+                startPostponedEnterTransition()
+            }
             rvUpComingMovie.layoutManager = layoutManager
             rvUpComingMovie.adapter = upComingAdapter.withLoadStateHeaderAndFooter(
                 header = HomeLoadStateAdapter{upComingAdapter.retry()},
                 footer = HomeLoadStateAdapter{upComingAdapter.retry()}
             )
         }
-
+        /*
         viewLifecycleOwner.lifecycleScope.launch {
             var position = 0
             var isIncrement: Boolean = true
@@ -124,13 +136,19 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
                 }
             }
         }
+
+         */
     }
 
     private fun initTrendingMovies() {
         this.trendingAdapter = MovieAdapter()
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        postponeEnterTransition(250,TimeUnit.MILLISECONDS)
         binding.apply {
             rvTrendingMovie.setHasFixedSize(true)
+            rvTrendingMovie.doOnPreDraw {
+                startPostponedEnterTransition()
+            }
             rvTrendingMovie.layoutManager = layoutManager
             rvTrendingMovie.adapter = trendingAdapter.withLoadStateHeaderAndFooter(
                 header = HomeLoadStateAdapter{trendingAdapter.retry()},

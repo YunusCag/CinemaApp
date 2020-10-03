@@ -1,9 +1,11 @@
 package com.yunuscagliyan.sinemalog.data.api
 
 import android.graphics.Movie
+import com.yunuscagliyan.sinemalog.data.models.MovieDetail
 import com.yunuscagliyan.sinemalog.data.models.MovieResponse
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 const val API_KEY = "4ceba0985010b11eb871640206d56895"
@@ -26,12 +28,18 @@ interface TheMovieDBInterface {
         @Query("page") page: Int,
         @Query("language") lang: String,
         @Query("region") region: String
-    ):MovieResponse
+    ): MovieResponse
 
     @GET("trending/movie/day?")
     suspend fun getTrendingMovie(
         @Query("page") page: Int,
         @Query("language") lang: String,
-    ):MovieResponse
+    ): MovieResponse
+
+    @GET("movie/{movie_id}")
+    suspend fun getMovieDetail(
+        @Path("movie_id") id: Int,
+        @Query("language") lang: String
+    ): MovieDetail
 
 }

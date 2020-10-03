@@ -6,13 +6,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.splash.SplashFragment">
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
+    <com.hanks.htextview.rainbow.RainbowTextView
+        android:id="@+id/rainbowTextView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SPLASH FRAGMENT"
+        android:text="Sinemalog"
+        android:textSize="28sp"
         android:textAlignment="center"
-        android:textSize="34sp"
+        android:textStyle="bold"
+        app:colorSpace="150dp"
+        app:colorSpeed="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

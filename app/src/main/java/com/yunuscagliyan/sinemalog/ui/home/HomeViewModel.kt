@@ -8,6 +8,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.yunuscagliyan.sinemalog.data.models.Movie
 import com.yunuscagliyan.sinemalog.data.repository.MovieRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 class HomeViewModel @ViewModelInject constructor(
     private val movieRepository: MovieRepository
