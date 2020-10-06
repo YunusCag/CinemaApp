@@ -1,11 +1,16 @@
 package com.yunuscagliyan.sinemalog.data.repository
 
+import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.liveData
 import com.yunuscagliyan.sinemalog.data.api.POST_PER_PAGE
 import com.yunuscagliyan.sinemalog.data.api.TheMovieDBInterface
+import com.yunuscagliyan.sinemalog.data.api.getLanguage
+import com.yunuscagliyan.sinemalog.data.models.Genre
+import com.yunuscagliyan.sinemalog.data.models.GenresResponse
 import com.yunuscagliyan.sinemalog.data.models.MovieDetail
+import com.yunuscagliyan.sinemalog.data.source.GenreMovieDataSource
 import com.yunuscagliyan.sinemalog.data.source.PopularDataSource
 import com.yunuscagliyan.sinemalog.data.source.TrendingDataSource
 import com.yunuscagliyan.sinemalog.data.source.UpComingDataSource
@@ -36,6 +41,15 @@ class MovieRepository @Inject constructor(
             PopularDataSource(theMovieDBInterface)
         }
     ).liveData
+    fun getMovieByGenre(genreId:Int)=Pager(
+        config = PagingConfig(
+            pageSize = POST_PER_PAGE,
+            enablePlaceholders = false
+        ),
+        pagingSourceFactory = {
+            GenreMovieDataSource(theMovieDBInterface,genreId)
+        }
+    ).liveData
 
     fun getTrendingMovie()=Pager(
         config = PagingConfig(
@@ -51,9 +65,18 @@ class MovieRepository @Inject constructor(
         emit(DataState.Loading)
 
         try{
-            val movieDetail=theMovieDBInterface.getMovieDetail(id,"en-US")
+            val movieDetail=theMovieDBInterface.getMovieDetail(id, getLanguage())
             emit(DataState.Success(movieDetail))
         }catch (e:Exception){
+            emit(DataState.Error(e))
+        }
+    }
+    suspend fun getGenresList():Flow<DataState<List<Genre>>> =flow{
+        emit(DataState.Loading)
+        try{
+            val genreList=theMovieDBInterface.getGenreList(getLanguage())
+            emit(DataState.Success(genreList.genres))
+        }catch (e:java.lang.Exception){
             emit(DataState.Error(e))
         }
     }

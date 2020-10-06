@@ -71,4 +71,28 @@
         android:name="com.yunuscagliyan.sinemalog.ui.setting.SettingFragment"
         android:label="@string/settings"
         tools:layout="@layout/fragment_setting" />
+    <fragment
+        android:id="@+id/destination_category"
+        android:name="com.yunuscagliyan.sinemalog.ui.category.CategoryFragment"
+        android:label="Categories Page"
+        tools:layout="@layout/fragment_category" >
+        <action
+            android:id="@+id/category_detail"
+            app:destination="@id/categoryDetailFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/categoryDetailFragment"
+        android:name="com.yunuscagliyan.sinemalog.ui.category.CategoryDetailFragment"
+        tools:layout="@layout/fragment_category_detail">
+        <action
+            android:id="@+id/action_movie_detail"
+            app:destination="@id/movieDetailFragment" />
+        <argument
+            android:name="genre"
+            app:argType="com.yunuscagliyan.sinemalog.data.models.Genre" />
+    </fragment>
 </navigation>

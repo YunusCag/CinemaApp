@@ -1,12 +1,12 @@
 package com.yunuscagliyan.sinemalog.data.api
 
-import android.graphics.Movie
+import com.yunuscagliyan.sinemalog.data.models.GenresResponse
 import com.yunuscagliyan.sinemalog.data.models.MovieDetail
 import com.yunuscagliyan.sinemalog.data.models.MovieResponse
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
+import java.util.*
 
 const val API_KEY = "4ceba0985010b11eb871640206d56895"
 const val BASE_URL = "https://api.themoviedb.org/3/"
@@ -42,4 +42,20 @@ interface TheMovieDBInterface {
         @Query("language") lang: String
     ): MovieDetail
 
+    @GET("genre/movie/list?")
+    suspend fun getGenreList(
+        @Query("language") lang: String
+    ): GenresResponse
+
+    @GET("movie/popular?")
+    suspend fun getMovieByGenre(
+        @Query("page") page: Int,
+        @Query("language") lang: String,
+        @Query("region") region: String,
+        @Query("with_genres")genreId:Int
+    ): MovieResponse
+}
+
+fun getLanguage(): String {
+    return "en-US"
 }

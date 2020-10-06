@@ -19,7 +19,7 @@ data class MovieDetail(
     @SerializedName("id")
     var id: Int?,
     @SerializedName("imdb_id")
-    var imdbİd: String?,
+    var imdbId: String?,
     @SerializedName("original_language")
     var originalLanguage: String?,
     @SerializedName("original_title")
@@ -55,13 +55,6 @@ data class MovieDetail(
     @SerializedName("vote_count")
     var voteCount: Int?
 ) {
-    data class Genre(
-        @SerializedName("id")
-        var id: Int?,
-        @SerializedName("name")
-        var name: String?
-    )
-
     data class ProductionCompany(
         @SerializedName("id")
         var id: Int?,

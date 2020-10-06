@@ -13,8 +13,6 @@
         tools:context=".fragments.SettingsFragment"
         tools:layout_editor_absoluteY="25dp">
 
-        <!-- TODO: Update blank fragment layout -->
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:gravity="top"
@@ -25,10 +23,11 @@
             android:layout_width="match_parent"
             android:layout_height="?android:actionBarSize" />
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
+            app:cardElevation="8dp"
             android:layout_marginTop="10dp"
             android:layout_below="@+id/toolbar">
 
@@ -44,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="3"
-                    android:text="@string/turn_on_night_mode_for_eye_health"
+                    android:text="@string/turn_on_night_mode"
                     android:textAlignment="textStart"
                     android:ellipsize="none"
                     android:maxLines="3"
@@ -64,7 +63,7 @@
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
 
 

@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.paging.PagingSource
 import com.yunuscagliyan.sinemalog.data.api.FIRST_PAGE
 import com.yunuscagliyan.sinemalog.data.api.TheMovieDBInterface
+import com.yunuscagliyan.sinemalog.data.api.getLanguage
 import com.yunuscagliyan.sinemalog.data.models.Movie
 import retrofit2.HttpException
 import java.io.IOException
@@ -16,7 +17,7 @@ class UpComingDataSource(
 
         return try {
 
-            val response = theMovieDBInterface.getUpComingMovie(position, "en-US")
+            val response = theMovieDBInterface.getUpComingMovie(position, getLanguage())
             val movies = response.movies
             LoadResult.Page(
                 data = movies,

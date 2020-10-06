@@ -9,4 +9,10 @@
     <string name="overview">Overview</string>
     <string name="home_page">Home Page</string>
     <string name="settings">Settings</string>
+    <string name="turn_on_night_mode">Turn on night mode.</string>
+    <string name="retry">Retry</string>
+    <string name="the_movie_lists_could_not_be_loaded">The movie info could not be loaded</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="movie_categories">Movie Categories</string>
 </resources>

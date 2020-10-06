@@ -1,9 +1,7 @@
 package com.yunuscagliyan.sinemalog.ui.home
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.yunuscagliyan.sinemalog.data.models.Movie
@@ -22,4 +20,6 @@ class HomeViewModel @ViewModelInject constructor(
     val trendingMovies:LiveData<PagingData<Movie>> by lazy {
         movieRepository.getTrendingMovie().cachedIn(viewModelScope)
     }
+
+
 }

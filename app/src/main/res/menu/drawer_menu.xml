@@ -9,14 +9,21 @@
             android:icon="@drawable/movie_icon"
             android:title="@string/home_page" />
         <item
+            android:id="@+id/destination_category"
+            android:checkable="true"
+            android:icon="@drawable/tv_icon"
+            android:title="@string/movie_categories" />
+        <item
             android:id="@+id/destination_trending"
             android:checkable="true"
             android:icon="@drawable/cinema_icon"
-            android:title="@string/trending_movie"/>
-        <item android:id="@+id/destination_popular"
+            android:title="@string/trending_movie" />
+        <item
+            android:id="@+id/destination_popular"
             android:checkable="true"
             android:icon="@drawable/tv_icon"
-            android:title="@string/popular_movie"/>
+            android:title="@string/popular_movie" />
+
     </group>
     <group
         android:id="@+id/menu_bottom"

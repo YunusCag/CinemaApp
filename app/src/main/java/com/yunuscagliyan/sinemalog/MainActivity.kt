@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initTheme() {
-        Log.e("TAG","Night Mode:${mPref.nightMode}")
         if(mPref.nightMode){
             ThemeHelper.applyTheme(ThemeHelper.DARK_MODE)
         }else{
