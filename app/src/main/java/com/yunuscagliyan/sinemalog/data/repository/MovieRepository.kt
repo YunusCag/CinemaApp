@@ -7,6 +7,7 @@ import androidx.paging.liveData
 import com.yunuscagliyan.sinemalog.data.api.POST_PER_PAGE
 import com.yunuscagliyan.sinemalog.data.api.TheMovieDBInterface
 import com.yunuscagliyan.sinemalog.data.api.getLanguage
+import com.yunuscagliyan.sinemalog.data.models.CastResponse
 import com.yunuscagliyan.sinemalog.data.models.Genre
 import com.yunuscagliyan.sinemalog.data.models.GenresResponse
 import com.yunuscagliyan.sinemalog.data.models.MovieDetail
@@ -79,5 +80,16 @@ class MovieRepository @Inject constructor(
         }catch (e:java.lang.Exception){
             emit(DataState.Error(e))
         }
+    }
+    suspend fun getMovieCasts(movieId:Int):Flow<DataState<CastResponse>> = flow{
+        emit(DataState.Loading)
+        try{
+            val castResponse=theMovieDBInterface.getMovieCast(movieId)
+            emit(DataState.Success(castResponse))
+        }catch (exception:java.lang.Exception){
+            emit(DataState.Error(exception))
+        }
+
+
     }
 }

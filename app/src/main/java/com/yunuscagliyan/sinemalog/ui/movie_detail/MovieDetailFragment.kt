@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionInflater
 import coil.load
 import com.bumptech.glide.Glide
@@ -34,6 +35,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
     private val binding get()=_binding!!
     private val viewModel:MovieDetailViewModel by viewModels()
     val args:MovieDetailFragmentArgs by navArgs()
+    private val castAdapter=CastAdapter()
 
 
 
@@ -54,6 +56,16 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
 
         gettingMovieDetail()
         initMovieDetailObserve()
+        initCastList()
+    }
+
+    private fun initCastList() {
+        binding.apply {
+            val layoutManager=LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+            rvMovieCast.setHasFixedSize(true)
+            rvMovieCast.layoutManager=layoutManager
+            rvMovieCast.adapter=castAdapter
+        }
     }
 
 
@@ -70,6 +82,14 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
                     displayProgress()
                 }
             }
+        })
+        viewModel.castDataState.observe(viewLifecycleOwner,{dataState->
+            when(dataState){
+                is DataState.Success->{
+                    this.castAdapter.submitList(dataState.data.cast!!)
+                }
+            }
+
         })
     }
 
@@ -151,6 +171,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
     private fun gettingMovieDetail() {
         if(args.movieId!=-1&&args.moviePosterURL!=null){
             viewModel.setStateEvent(MovieDetailStateEvent.GetMovieDetail(args.movieId))
+            viewModel.setStateEvent(MovieDetailStateEvent.GetCasts(args.movieId))
             binding.apply {
                 tvMovieTitle.transitionName="${args.movieId}"
             }

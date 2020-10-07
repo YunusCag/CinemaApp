@@ -1,5 +1,6 @@
 package com.yunuscagliyan.sinemalog.data.api
 
+import com.yunuscagliyan.sinemalog.data.models.CastResponse
 import com.yunuscagliyan.sinemalog.data.models.GenresResponse
 import com.yunuscagliyan.sinemalog.data.models.MovieDetail
 import com.yunuscagliyan.sinemalog.data.models.MovieResponse
@@ -54,6 +55,11 @@ interface TheMovieDBInterface {
         @Query("region") region: String,
         @Query("with_genres")genreId:Int
     ): MovieResponse
+
+    @GET("movie/{movie_id}/credits")
+    suspend fun getMovieCast(
+        @Path("movie_id")movieId:Int
+    ):CastResponse
 }
 
 fun getLanguage(): String {
