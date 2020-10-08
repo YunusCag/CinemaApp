@@ -29,10 +29,7 @@ class OnBoardingFragment : Fragment(R.layout.fragment_on_boarding) {
     private fun initUI() {
         binding.button.setOnClickListener {
             mPref.isFirstTime=false
-            val navOptions=NavOptions.Builder()
-                .setPopUpTo(R.id.onBoardingFragment,true)
-                .build()
-            navController.navigate(R.id.destination_home,null,navOptions)
+            navController.navigate(R.id.action_home)
         }
     }
 

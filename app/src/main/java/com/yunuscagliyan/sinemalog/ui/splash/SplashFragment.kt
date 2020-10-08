@@ -32,13 +32,10 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     private fun initUI() {
         viewLifecycleOwner.lifecycleScope.launch {
             delay(1000L)
-            val navOptions=NavOptions.Builder()
-                .setPopUpTo(R.id.splashFragment,true)
-                .build()
             if(mPref.isFirstTime){
-                navController.navigate(R.id.onBoardingFragment,null,navOptions)
+                navController.navigate(R.id.action_on_board,)
             }else{
-                navController.navigate(R.id.destination_home,null,navOptions)
+                navController.navigate(R.id.action_home)
             }
 
 

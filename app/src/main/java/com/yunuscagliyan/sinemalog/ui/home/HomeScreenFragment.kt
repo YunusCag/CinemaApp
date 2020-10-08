@@ -54,6 +54,9 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
             tvTrending.setOnClickListener {
                 navController.navigate(HomeScreenFragmentDirections.trendingViewAll())
             }
+            tvUpcoming.setOnClickListener {
+                navController.navigate(HomeScreenFragmentDirections.upComingViewAll())
+            }
         }
     }
     private fun initUpComingObserve() {
