@@ -53,7 +53,14 @@
             app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/up_coming_view_all"
-            app:destination="@id/upComingFragment"
+            app:destination="@id/destination_up_coming"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/top_rated_view_all"
+            app:destination="@id/destination_top_rated"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
@@ -120,8 +127,21 @@
             app:argType="com.yunuscagliyan.sinemalog.data.models.Genre" />
     </fragment>
     <fragment
-        android:id="@+id/upComingFragment"
+        android:id="@+id/destination_up_coming"
         android:name="com.yunuscagliyan.sinemalog.ui.upcoming.UpComingFragment"
         android:label="@string/up_coming_movie"
-        tools:layout="@layout/fragment_up_coming" />
+        tools:layout="@layout/fragment_up_coming" >
+        <action
+            android:id="@+id/action_movie_detail"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/destination_top_rated"
+        android:name="com.yunuscagliyan.sinemalog.ui.top_rated.TopRatedFragment"
+        android:label="@string/top_rated_movie"
+        tools:layout="@layout/fragment_top_rated">
+        <action
+            android:id="@+id/action_movie_detail"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
 </navigation>

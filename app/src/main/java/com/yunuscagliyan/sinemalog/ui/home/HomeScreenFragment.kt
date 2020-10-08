@@ -14,6 +14,7 @@ import com.yunuscagliyan.sinemalog.MainActivity
 import com.yunuscagliyan.sinemalog.R
 import com.yunuscagliyan.sinemalog.databinding.FragmentHomeScreenBinding
 import com.yunuscagliyan.sinemalog.ui.adapters.HomeLoadStateAdapter
+import com.yunuscagliyan.sinemalog.ui.adapters.MovieDetailAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -29,6 +30,7 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
     private lateinit var upComingAdapter: UpComingAdapter
     private lateinit var popularAdapter: MovieAdapter
     private lateinit var trendingAdapter: MovieAdapter
+    private lateinit var topRatedAdapter:MovieAdapter
     private lateinit var navController: NavController
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,14 +41,18 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
         initUpComingObserve()
         initPopularObserve()
         initTrendingObserve()
+        initTopRatedObserve()
 
     }
+
+
 
     private fun initUI() {
         (activity as MainActivity).setUpToolbar(binding.toolbar)
         initUpComingMovies()
         initPopularMovie()
         initTrendingMovies()
+        initTopRatedMovies()
         binding.apply {
             tvPopular.setOnClickListener {
                 navController.navigate(HomeScreenFragmentDirections.popularViewAll())
@@ -57,8 +63,12 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
             tvUpcoming.setOnClickListener {
                 navController.navigate(HomeScreenFragmentDirections.upComingViewAll())
             }
+            tvTopRated.setOnClickListener {
+                navController.navigate(HomeScreenFragmentDirections.topRatedViewAll())
+            }
         }
     }
+
     private fun initUpComingObserve() {
         viewModel.upComingMovies.observe(viewLifecycleOwner) {
             upComingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
@@ -74,6 +84,11 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
     private fun initTrendingObserve() {
         viewModel.trendingMovies.observe(viewLifecycleOwner, {
             trendingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+        })
+    }
+    private fun initTopRatedObserve() {
+        viewModel.topRatedMovies.observe(viewLifecycleOwner,{
+            topRatedAdapter.submitData(viewLifecycleOwner.lifecycle,it)
         })
     }
 
@@ -94,6 +109,22 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
         }
 
     }
+    private fun initTopRatedMovies() {
+        this.topRatedAdapter = MovieAdapter()
+        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        postponeEnterTransition(250, TimeUnit.MILLISECONDS)
+        binding.apply {
+            rvTopRatedMovie.setHasFixedSize(true)
+            rvTopRatedMovie.layoutManager = layoutManager
+            rvTopRatedMovie.doOnPreDraw {
+                startPostponedEnterTransition()
+            }
+            rvTopRatedMovie.adapter = topRatedAdapter.withLoadStateHeaderAndFooter(
+                header = HomeLoadStateAdapter{popularAdapter.retry()},
+                footer = HomeLoadStateAdapter{popularAdapter.retry()}
+            )
+        }
+    }
 
 
     private fun initUpComingMovies() {
@@ -113,34 +144,7 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
                 footer = HomeLoadStateAdapter{upComingAdapter.retry()}
             )
         }
-        /*
-        viewLifecycleOwner.lifecycleScope.launch {
-            var position = 0
-            var isIncrement: Boolean = true
-            while (true) {
-                delay(2000L)
 
-                binding.apply {
-                    if (10 > position && isIncrement) {
-                        ++position
-                    }
-                    if (position == 10) {
-                        isIncrement = false
-                    }
-                    if (!isIncrement) {
-                        position -= 1
-                    }
-                    if (position == 0) {
-                        isIncrement = true
-                    }
-                    rvUpComingMovie.smoothScrollToPosition(position)
-
-
-                }
-            }
-        }
-
-         */
     }
 
     private fun initTrendingMovies() {

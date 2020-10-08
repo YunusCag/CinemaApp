@@ -20,6 +20,9 @@ class HomeViewModel @ViewModelInject constructor(
     val trendingMovies:LiveData<PagingData<Movie>> by lazy {
         movieRepository.getTrendingMovie().cachedIn(viewModelScope)
     }
+    val topRatedMovies:LiveData<PagingData<Movie>> by lazy {
+        movieRepository.getTopRatedMovie().cachedIn(viewModelScope)
+    }
 
 
 }

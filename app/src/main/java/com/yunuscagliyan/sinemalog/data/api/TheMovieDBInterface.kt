@@ -37,6 +37,13 @@ interface TheMovieDBInterface {
         @Query("language") lang: String,
     ): MovieResponse
 
+    @GET("movie/top_rated")
+    suspend fun getTopRatedMovie(
+        @Query("page") page:Int,
+        @Query("language") lang: String,
+        @Query("region") region: String
+    ):MovieResponse
+
     @GET("movie/{movie_id}")
     suspend fun getMovieDetail(
         @Path("movie_id") id: Int,
@@ -55,6 +62,7 @@ interface TheMovieDBInterface {
         @Query("region") region: String,
         @Query("with_genres")genreId:Int
     ): MovieResponse
+
 
     @GET("movie/{movie_id}/credits")
     suspend fun getMovieCast(

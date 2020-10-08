@@ -11,10 +11,7 @@ import com.yunuscagliyan.sinemalog.data.models.CastResponse
 import com.yunuscagliyan.sinemalog.data.models.Genre
 import com.yunuscagliyan.sinemalog.data.models.GenresResponse
 import com.yunuscagliyan.sinemalog.data.models.MovieDetail
-import com.yunuscagliyan.sinemalog.data.source.GenreMovieDataSource
-import com.yunuscagliyan.sinemalog.data.source.PopularDataSource
-import com.yunuscagliyan.sinemalog.data.source.TrendingDataSource
-import com.yunuscagliyan.sinemalog.data.source.UpComingDataSource
+import com.yunuscagliyan.sinemalog.data.source.*
 import com.yunuscagliyan.sinemalog.utils.DataState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -59,6 +56,15 @@ class MovieRepository @Inject constructor(
         ),
         pagingSourceFactory = {
             TrendingDataSource(theMovieDBInterface)
+        }
+    ).liveData
+    fun getTopRatedMovie()=Pager(
+        config = PagingConfig(
+            pageSize = POST_PER_PAGE,
+            enablePlaceholders = false
+        ),
+        pagingSourceFactory = {
+            TopRatedDataSource(theMovieDBInterface)
         }
     ).liveData
 

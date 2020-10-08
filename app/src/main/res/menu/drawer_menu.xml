@@ -13,6 +13,10 @@
             android:checkable="true"
             android:icon="@drawable/tv_icon"
             android:title="@string/movie_categories" />
+        <item android:id="@+id/destination_up_coming"
+            android:checkable="true"
+            android:title="@string/up_coming_movie"
+            android:icon="@drawable/movie_icon"/>
         <item
             android:id="@+id/destination_trending"
             android:checkable="true"
@@ -23,6 +27,12 @@
             android:checkable="true"
             android:icon="@drawable/tv_icon"
             android:title="@string/popular_movie" />
+        <item
+            android:id="@+id/destination_top_rated"
+            android:checkable="true"
+            android:icon="@drawable/cinema_icon"
+            android:title="@string/top_rated_movie" />
+
 
     </group>
     <group
