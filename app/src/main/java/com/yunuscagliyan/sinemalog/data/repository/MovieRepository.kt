@@ -67,6 +67,15 @@ class MovieRepository @Inject constructor(
             TopRatedDataSource(theMovieDBInterface)
         }
     ).liveData
+    fun getSimilarMovie(movieId: Int)=Pager(
+        config = PagingConfig(
+            pageSize = POST_PER_PAGE,
+            enablePlaceholders = false
+        ),
+        pagingSourceFactory = {
+            SimilarDataSource(theMovieDBInterface,movieId)
+        }
+    ).liveData
 
     suspend fun getMovieDetail(id:Int): Flow<DataState<MovieDetail>> =flow {
         emit(DataState.Loading)

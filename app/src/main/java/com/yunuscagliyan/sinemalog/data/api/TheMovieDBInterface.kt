@@ -44,6 +44,13 @@ interface TheMovieDBInterface {
         @Query("region") region: String
     ):MovieResponse
 
+    @GET("movie/{movie_id}/similar?")
+    suspend fun getSimilarMovie(
+        @Path("movie_id")id: Int,
+        @Query("page") page:Int,
+        @Query("language") lang: String
+    ):MovieResponse
+
     @GET("movie/{movie_id}")
     suspend fun getMovieDetail(
         @Path("movie_id") id: Int,

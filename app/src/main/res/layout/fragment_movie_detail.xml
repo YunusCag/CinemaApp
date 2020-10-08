@@ -162,14 +162,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingStart="5dp"
-                        android:text="Cast"
+                        android:text="@string/cast"
+                        android:textSize="18sp"
                         android:textColor="@color/titleTextColor"
                         android:textStyle="bold" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_movie_cast"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="250dp"
                         tools:listitem="@layout/item_cast" />
 
                 </LinearLayout>
@@ -199,6 +200,30 @@
                         android:textSize="18sp"
                         android:textStyle="normal"
                         tools:text="Movie Description" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout_similar_movie"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layout_overview"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_similar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="5dp"
+                        android:textSize="18sp"
+                        android:text="@string/similar_movie"
+                        android:textColor="@color/titleTextColor"
+                        android:textStyle="bold" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_similar_movie"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:listitem="@layout/item_movie" />
 
                 </LinearLayout>
             </RelativeLayout>

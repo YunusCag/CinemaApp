@@ -1,9 +1,13 @@
 package com.yunuscagliyan.sinemalog.ui.movie_detail
 
+import android.util.Log
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.yunuscagliyan.sinemalog.data.models.CastResponse
+import com.yunuscagliyan.sinemalog.data.models.Movie
 import com.yunuscagliyan.sinemalog.data.models.MovieDetail
 import com.yunuscagliyan.sinemalog.data.repository.MovieRepository
 import com.yunuscagliyan.sinemalog.utils.DataState
@@ -27,6 +31,10 @@ constructor(
 
     private val _castDataState:MutableLiveData<DataState<CastResponse>> = MutableLiveData()
     val castDataState:MutableLiveData<DataState<CastResponse>> =_castDataState
+
+    private var _similarMovie:LiveData<PagingData<Movie>> =MutableLiveData()
+    val similarMovie:LiveData<PagingData<Movie>> =_similarMovie
+    fun getSimilarMovie(movieId: Int)=this.repository.getSimilarMovie(movieId)
     fun setStateEvent(state: MovieDetailStateEvent) {
         viewModelScope.launch {
             when (state) {
@@ -44,6 +52,9 @@ constructor(
                         }
                         .launchIn(viewModelScope)
                 }
+                is MovieDetailStateEvent.GetSimilarMovie->{
+                    _similarMovie=repository.getSimilarMovie(state.movieId).cachedIn(viewModelScope)
+                }
             }
         }
     }
@@ -54,4 +65,5 @@ sealed class MovieDetailStateEvent {
     class GetMovieDetail(val movieId: Int) : MovieDetailStateEvent()
 
     class GetCasts(val movieId: Int) : MovieDetailStateEvent()
+    class GetSimilarMovie(val movieId:Int):MovieDetailStateEvent()
 }
