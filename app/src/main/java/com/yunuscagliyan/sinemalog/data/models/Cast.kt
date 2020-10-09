@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class Cast(
     @SerializedName("cast_id")
-    var castİd: Int?,
+    var castId: Int?,
     @SerializedName("character")
     var character: String?,
     @SerializedName("credit_id")
-    var creditİd: String?,
+    var creditId: String?,
     @SerializedName("gender")
     var gender: Int?,
     @SerializedName("id")

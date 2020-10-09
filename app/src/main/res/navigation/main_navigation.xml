@@ -96,6 +96,16 @@
             android:name="moviePosterURL"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_trailer"
+            app:destination="@id/destination_trailer"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_credit"
+            app:destination="@id/creditFragment" />
     </fragment>
     <fragment
         android:id="@+id/destination_setting"
@@ -143,5 +153,27 @@
         <action
             android:id="@+id/action_movie_detail"
             app:destination="@id/movieDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/destination_trailer"
+        android:name="com.yunuscagliyan.sinemalog.ui.trailer.TrailerFragment"
+        android:label="@string/trailer"
+        tools:layout="@layout/fragment_trailer">
+        <argument
+            android:name="movieId"
+            android:defaultValue="-1"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/creditFragment"
+        android:name="com.yunuscagliyan.sinemalog.ui.credit.CreditFragment"
+        android:label="Credit"
+        tools:layout="@layout/fragment_credit">
+        <action
+            android:id="@+id/action_movie_detail"
+            app:destination="@id/movieDetailFragment" />
+        <argument
+            android:name="creditId"
+            app:argType="string" />
     </fragment>
 </navigation>

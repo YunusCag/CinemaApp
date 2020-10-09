@@ -6,9 +6,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.yunuscagliyan.sinemalog.data.models.CastResponse
-import com.yunuscagliyan.sinemalog.data.models.Movie
-import com.yunuscagliyan.sinemalog.data.models.MovieDetail
+import com.yunuscagliyan.sinemalog.data.models.*
 import com.yunuscagliyan.sinemalog.data.repository.MovieRepository
 import com.yunuscagliyan.sinemalog.utils.DataState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -29,12 +27,20 @@ constructor(
     val detailDataState: LiveData<DataState<MovieDetail>>
         get() = _detailDataState
 
-    private val _castDataState:MutableLiveData<DataState<CastResponse>> = MutableLiveData()
-    val castDataState:MutableLiveData<DataState<CastResponse>> =_castDataState
+    private val _castDataState: MutableLiveData<DataState<CastResponse>> = MutableLiveData()
+    val castDataState: MutableLiveData<DataState<CastResponse>> = _castDataState
 
-    private var _similarMovie:LiveData<PagingData<Movie>> =MutableLiveData()
-    val similarMovie:LiveData<PagingData<Movie>> =_similarMovie
-    fun getSimilarMovie(movieId: Int)=this.repository.getSimilarMovie(movieId)
+    private var _similarMovie: LiveData<PagingData<Movie>> = MutableLiveData()
+
+    val similarMovie: LiveData<PagingData<Movie>> = _similarMovie
+
+    private val _trailerDataState: MutableLiveData<DataState<VideoResponse>> = MutableLiveData()
+    val trailerDataState: MutableLiveData<DataState<VideoResponse>> = _trailerDataState
+
+    private val _creditDataState: MutableLiveData<DataState<CreditResponse>> = MutableLiveData()
+    val creditDataState: MutableLiveData<DataState<CreditResponse>> = _creditDataState
+
+    fun getSimilarMovie(movieId: Int) = this.repository.getSimilarMovie(movieId)
     fun setStateEvent(state: MovieDetailStateEvent) {
         viewModelScope.launch {
             when (state) {
@@ -45,15 +51,31 @@ constructor(
                         }
                         .launchIn(viewModelScope)
                 }
-                is MovieDetailStateEvent.GetCasts->{
+                is MovieDetailStateEvent.GetCasts -> {
                     repository.getMovieCasts(state.movieId)
                         .onEach {
-                            _castDataState.value=it
+                            _castDataState.value = it
                         }
                         .launchIn(viewModelScope)
                 }
-                is MovieDetailStateEvent.GetSimilarMovie->{
-                    _similarMovie=repository.getSimilarMovie(state.movieId).cachedIn(viewModelScope)
+                is MovieDetailStateEvent.GetSimilarMovie -> {
+                    _similarMovie =
+                        repository.getSimilarMovie(state.movieId).cachedIn(viewModelScope)
+                }
+                is MovieDetailStateEvent.GetMovieTrailer -> {
+                    repository.getMovieTrailer(state.movieId)
+                        .onEach {
+
+                            _trailerDataState.value = it
+                        }
+                        .launchIn(viewModelScope)
+                }
+                is MovieDetailStateEvent.GetCredit -> {
+                    repository.getCredit(state.creditId)
+                        .onEach {
+                            _creditDataState.value = it
+                        }
+                        .launchIn(viewModelScope)
                 }
             }
         }
@@ -63,7 +85,8 @@ constructor(
 sealed class MovieDetailStateEvent {
 
     class GetMovieDetail(val movieId: Int) : MovieDetailStateEvent()
-
     class GetCasts(val movieId: Int) : MovieDetailStateEvent()
-    class GetSimilarMovie(val movieId:Int):MovieDetailStateEvent()
+    class GetSimilarMovie(val movieId: Int) : MovieDetailStateEvent()
+    class GetMovieTrailer(val movieId: Int) : MovieDetailStateEvent()
+    class GetCredit(val creditId: String) : MovieDetailStateEvent()
 }

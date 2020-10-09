@@ -17,4 +17,6 @@
     <string name="top_rated_movie">En Çok Oy alan Filmler</string>
     <string name="cast">Oyuncular</string>
     <string name="similar_movie">Benzer Filmler</string>
+    <string name="watch_trailer">Fragmanı izle</string>
+    <string name="trailer">Fragman</string>
 </resources>

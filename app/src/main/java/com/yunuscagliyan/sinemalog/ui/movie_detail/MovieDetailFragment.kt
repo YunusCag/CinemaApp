@@ -2,15 +2,16 @@ package com.yunuscagliyan.sinemalog.ui.movie_detail
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionInflater
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -36,9 +37,9 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
     private val binding get() = _binding!!
     private val viewModel: MovieDetailViewModel by viewModels()
     val args: MovieDetailFragmentArgs by navArgs()
+    private lateinit var navController: NavController
     private val castAdapter = CastAdapter()
     private val movieAdapter = MovieAdapter()
-
 
     private fun setUpShareAnimation() {
         sharedElementEnterTransition =
@@ -50,6 +51,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMovieDetailBinding.bind(view)
+        this.navController=Navigation.findNavController(view)
         initUI()
         setUpShareAnimation()
         postponeEnterTransition(250, TimeUnit.MILLISECONDS)
@@ -62,7 +64,6 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
         initSimilarMovieList()
 
     }
-
     private fun initSimilarMovieList() {
         binding.apply {
             val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -87,8 +88,10 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
     private fun initCastList() {
         binding.apply {
             val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            postponeEnterTransition(250, TimeUnit.MILLISECONDS)
             rvMovieCast.setHasFixedSize(true)
+            rvMovieCast.doOnPreDraw {
+                startPostponedEnterTransition()
+            }
             rvMovieCast.layoutManager = layoutManager
             rvMovieCast.adapter = castAdapter
         }
@@ -192,6 +195,10 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
 
     private fun initUI() {
         (activity as MainActivity).setUpToolbar(binding.toolbar)
+        binding.btnNavigateTrailer.setOnClickListener {
+            val bundle= bundleOf("movieId" to args.movieId)
+            this.navController.navigate(R.id.action_trailer,bundle)
+        }
     }
 
     private fun gettingMovieDetail() {
@@ -210,7 +217,8 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding = null
+        _binding=null
     }
+
 
 }

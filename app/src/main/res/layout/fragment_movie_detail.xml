@@ -180,7 +180,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/layout_casts"
-                    android:layout_marginBottom="50dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -203,10 +203,25 @@
 
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/layout_trailer"
+                    android:layout_below="@+id/layout_overview"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_navigate_trailer"
+                        android:text="@string/watch_trailer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+                <LinearLayout
                     android:id="@+id/layout_similar_movie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/layout_overview"
+                    android:layout_below="@+id/layout_trailer"
                     android:orientation="vertical">
 
                     <TextView

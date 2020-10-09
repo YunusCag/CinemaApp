@@ -7,10 +7,7 @@ import androidx.paging.liveData
 import com.yunuscagliyan.sinemalog.data.api.POST_PER_PAGE
 import com.yunuscagliyan.sinemalog.data.api.TheMovieDBInterface
 import com.yunuscagliyan.sinemalog.data.api.getLanguage
-import com.yunuscagliyan.sinemalog.data.models.CastResponse
-import com.yunuscagliyan.sinemalog.data.models.Genre
-import com.yunuscagliyan.sinemalog.data.models.GenresResponse
-import com.yunuscagliyan.sinemalog.data.models.MovieDetail
+import com.yunuscagliyan.sinemalog.data.models.*
 import com.yunuscagliyan.sinemalog.data.source.*
 import com.yunuscagliyan.sinemalog.utils.DataState
 import kotlinx.coroutines.flow.Flow
@@ -104,7 +101,23 @@ class MovieRepository @Inject constructor(
         }catch (exception:java.lang.Exception){
             emit(DataState.Error(exception))
         }
-
-
+    }
+    suspend fun getMovieTrailer(movieId: Int):Flow<DataState<VideoResponse>> = flow {
+        emit(DataState.Loading)
+        try {
+            val videoResponse=theMovieDBInterface.getMovieTrailer(movieId, getLanguage())
+            emit(DataState.Success(videoResponse))
+        }catch (exception:java.lang.Exception){
+            emit(DataState.Error(exception))
+        }
+    }
+    suspend fun getCredit(creditId:String):Flow<DataState<CreditResponse>> =flow{
+        emit(DataState.Loading)
+        try{
+            val creditResponse=theMovieDBInterface.getCredit(creditId)
+            emit(DataState.Success(creditResponse))
+        }catch (exception:java.lang.Exception){
+            emit(DataState.Error(exception))
+        }
     }
 }

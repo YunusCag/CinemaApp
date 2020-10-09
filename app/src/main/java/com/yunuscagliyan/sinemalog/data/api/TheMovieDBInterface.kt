@@ -1,9 +1,6 @@
 package com.yunuscagliyan.sinemalog.data.api
 
-import com.yunuscagliyan.sinemalog.data.models.CastResponse
-import com.yunuscagliyan.sinemalog.data.models.GenresResponse
-import com.yunuscagliyan.sinemalog.data.models.MovieDetail
-import com.yunuscagliyan.sinemalog.data.models.MovieResponse
+import com.yunuscagliyan.sinemalog.data.models.*
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -39,17 +36,17 @@ interface TheMovieDBInterface {
 
     @GET("movie/top_rated")
     suspend fun getTopRatedMovie(
-        @Query("page") page:Int,
+        @Query("page") page: Int,
         @Query("language") lang: String,
         @Query("region") region: String
-    ):MovieResponse
+    ): MovieResponse
 
     @GET("movie/{movie_id}/similar?")
     suspend fun getSimilarMovie(
-        @Path("movie_id")id: Int,
-        @Query("page") page:Int,
+        @Path("movie_id") id: Int,
+        @Query("page") page: Int,
         @Query("language") lang: String
-    ):MovieResponse
+    ): MovieResponse
 
     @GET("movie/{movie_id}")
     suspend fun getMovieDetail(
@@ -67,14 +64,25 @@ interface TheMovieDBInterface {
         @Query("page") page: Int,
         @Query("language") lang: String,
         @Query("region") region: String,
-        @Query("with_genres")genreId:Int
+        @Query("with_genres") genreId: Int
     ): MovieResponse
 
 
     @GET("movie/{movie_id}/credits")
     suspend fun getMovieCast(
-        @Path("movie_id")movieId:Int
-    ):CastResponse
+        @Path("movie_id") movieId: Int
+    ): CastResponse
+
+    @GET("credit/{credit_id}?")
+    suspend fun getCredit(
+        @Path("credit_id")creditId:String
+    ):CreditResponse
+
+    @GET("movie/{movie_id}/videos?")
+    suspend fun getMovieTrailer(
+        @Path("movie_id") movieId: Int,
+        @Query("language") lang: String
+    ): VideoResponse
 }
 
 fun getLanguage(): String {
