@@ -16,6 +16,7 @@
         <item name="actionMenuTextColor">@android:color/white</item>
     </style>
     <style name="NavigationView" parent="Widget.Design.NavigationView">
+        <item name="colorPrimary">@color/btnTrailer</item>
         <item name="itemIconTint">@android:color/white</item>
         <item name="android:colorAccent">@color/colorAccent</item>
         <item name="colorControlActivated">@color/colorAccent</item>

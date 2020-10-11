@@ -24,7 +24,7 @@ class SharedPref @Inject constructor(@ApplicationContext context: Context) {
     var nightMode: Boolean
         get() {
             return mSharedPreferences.getBoolean(
-                THEME_STATE_KEY, false
+                THEME_STATE_KEY, true
             )
         }
         set(state: Boolean) {

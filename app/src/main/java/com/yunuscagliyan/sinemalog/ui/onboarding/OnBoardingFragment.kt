@@ -27,6 +27,12 @@ class OnBoardingFragment : Fragment(R.layout.fragment_on_boarding) {
     }
 
     private fun initUI() {
+        val textList=resources.getStringArray(R.array.on_boarding_texts)
+        val adapter=OnBoardAdapter(textList.toList())
+        binding.apply {
+            viewPager.adapter=adapter
+            dotsIndicator.setViewPager2(viewPager)
+        }
         binding.button.setOnClickListener {
             mPref.isFirstTime=false
             navController.navigate(R.id.action_home)

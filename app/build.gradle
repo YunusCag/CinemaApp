@@ -85,7 +85,11 @@ dependencies {
     implementation "com.hanks:htextview-base:$htextview_version"
     implementation "com.hanks:htextview-rainbow:$htextview_version"
 
+    //Youtube Player View
     implementation 'com.github.PierfrancescoSoffritti:AndroidYouTubePlayer:7.0.1'
+    //Dots
+    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
+
 
 
 

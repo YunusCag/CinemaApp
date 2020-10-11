@@ -5,8 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.yunuscagliyan.sinemalog.MainActivity
+import com.pierfrancescosoffritti.youtubeplayer.player.AbstractYouTubePlayerListener
 import com.yunuscagliyan.sinemalog.R
 import com.yunuscagliyan.sinemalog.databinding.FragmentTrailerBinding
 import com.yunuscagliyan.sinemalog.ui.movie_detail.MovieDetailStateEvent
@@ -19,7 +18,6 @@ class TrailerFragment : Fragment(R.layout.fragment_trailer) {
     private var _binding:FragmentTrailerBinding?=null
     private val binding get()=_binding!!
     private val viewModel: MovieDetailViewModel by viewModels()
-    private lateinit var adapter:TrailerAdapter
     private val args by navArgs<TrailerFragmentArgs>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,26 +25,27 @@ class TrailerFragment : Fragment(R.layout.fragment_trailer) {
         _binding= FragmentTrailerBinding.bind(view)
         initUI()
         initTrailerObserve()
-        initTrailerList()
     }
 
-    private fun initTrailerList() {
-        val layoutManger=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
-        binding.apply {
-            rvTrailer.layoutManager=layoutManger
-            rvTrailer.setHasFixedSize(true)
-            rvTrailer.adapter=adapter
-        }
-    }
+
 
     private fun initTrailerObserve() {
         viewModel.trailerDataState.observe(viewLifecycleOwner,{state->
             when(state){
                 is DataState.Success->{
-                    if(state.data.videos!!.size>2){
-                        this.adapter.submitList(state.data.videos!!.subList(0,1))
-                    }else{
-                        this.adapter.submitList(state.data.videos!!)
+                    if(state.data.videos!!.isNotEmpty()){
+                        val video=state.data.videos!![0]
+                        binding.apply {
+                            val videoId=video!!.key
+                            youtubePlayerView.initialize({ youTubePlayer ->
+                                youTubePlayer.addListener(object: AbstractYouTubePlayerListener(){
+                                    override fun onReady() {
+                                        youTubePlayer.loadVideo(videoId!!,0f)
+                                        youTubePlayer.pause()
+                                    }
+                                })
+                            },true)
+                        }
                     }
 
                 }
@@ -55,9 +54,8 @@ class TrailerFragment : Fragment(R.layout.fragment_trailer) {
     }
 
     private fun initUI() {
-        this.adapter= TrailerAdapter()
         viewModel.setStateEvent(MovieDetailStateEvent.GetMovieTrailer(args.movieId))
-        (activity as MainActivity).setUpToolbar(binding.toolbar)
+        //(activity as MainActivity).setUpToolbar(binding.toolbar)
 
     }
 

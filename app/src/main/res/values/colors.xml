@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimary">#EEEEEE</color>
     <color name="colorPrimaryDark">#BDBDBD</color>
     <color name="colorAccent">#4CAF50</color>
     <color name="colorTabSelected">@android:color/black</color>
@@ -9,4 +9,5 @@
     <color name="sideMenuBackground">#EEEEEE</color>
     <color name="titleTextColor">#000000</color>
     <color name="switchColor">#911DEE</color>
+    <color name="btnTrailer">#6200EE</color>
 </resources>

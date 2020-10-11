@@ -146,7 +146,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
             toolbar.title = detail.title
         }
         binding.apply {
-            tvMovieTitle.text = detail.title
+            toolbarLayout.title = detail.title
             tvMovieOverview.text = detail.overview
             tvMovieTime.text = "${detail.runtime}"
 
@@ -199,6 +199,11 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
             val bundle= bundleOf("movieId" to args.movieId)
             this.navController.navigate(R.id.action_trailer,bundle)
         }
+        binding.apply {
+            buttonRetry.setOnClickListener {
+                viewModel.setStateEvent(MovieDetailStateEvent.GetMovieDetail(args.movieId))
+            }
+        }
     }
 
     private fun gettingMovieDetail() {
@@ -207,7 +212,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
             viewModel.setStateEvent(MovieDetailStateEvent.GetMovieDetail(args.movieId))
             viewModel.setStateEvent(MovieDetailStateEvent.GetCasts(args.movieId))
             binding.apply {
-                tvMovieTitle.transitionName = "${args.movieId}"
+                toolbarLayout.transitionName = "${args.movieId}"
             }
             bindImage(args.moviePosterURL!!)
 
