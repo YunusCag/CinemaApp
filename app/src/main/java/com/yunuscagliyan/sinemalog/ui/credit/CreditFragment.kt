@@ -74,8 +74,6 @@ class CreditFragment : Fragment(R.layout.fragment_credit) {
                     if (creditResponse.person!!.knownFor != null && creditResponse.person!!.knownFor!!.isNotEmpty()) {
                         this.adapter.submitList(state.data.person!!.knownFor!!)
                     }
-                    val profilePath = POSTER_BASE_URL + state.data.person!!.profilePath!!
-                    bindImage(profilePath)
                     binding.toolbar.title = state.data.person!!.name
                     binding.toolbarLayout.title=state.data.person!!.name
                 }
@@ -122,6 +120,7 @@ class CreditFragment : Fragment(R.layout.fragment_credit) {
     private fun initUI() {
         this.adapter = CreditAdapter()
         (activity as MainActivity).setUpToolbar(binding.toolbar)
+        bindImage(args.profileURL)
         viewModel.setStateEvent(MovieDetailStateEvent.GetCredit(args.creditId))
     }
 

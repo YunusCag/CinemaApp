@@ -175,5 +175,8 @@
         <argument
             android:name="creditId"
             app:argType="string" />
+        <argument
+            android:name="profileURL"
+            app:argType="string" />
     </fragment>
 </navigation>

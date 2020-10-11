@@ -54,7 +54,7 @@ class CastAdapter():RecyclerView.Adapter<CastAdapter.CastViewHolder>(){
                     val extras= FragmentNavigatorExtras(
                         binding.ivCastProfile to profileURL,
                     )
-                    val bundle= bundleOf("creditId" to cast.creditId)
+                    val bundle= bundleOf("creditId" to cast.creditId,"profileURL" to profileURL)
                     view.findNavController().navigate(R.id.action_credit,bundle,null,extras)
 
                 }
