@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Sinemalog</string>
-    <string name="up_coming_movie">Up Coming Movie</string>
+    <string name="up_coming_movie">Up Coming</string>
     <string name="view_all">View All</string>
-    <string name="trending_movie">Trending Movie</string>
-    <string name="popular_movie">Popular Movie</string>
+    <string name="trending_movie">Trending</string>
+    <string name="popular_movie">Popular</string>
     <string name="release_date">Release Date:</string>
     <string name="minutes">minutes</string>
     <string name="overview">Overview</string>
@@ -12,8 +12,8 @@
     <string name="turn_on_night_mode">Turn on night mode.</string>
     <string name="retry">Retry</string>
     <string name="the_movie_lists_could_not_be_loaded">The movie list can not be loaded</string>
-    <string name="movie_categories">Movie Categories</string>
-    <string name="top_rated_movie">Top Rated Movie</string>
+    <string name="movie_categories">Categories</string>
+    <string name="top_rated_movie">Top Rated</string>
     <string name="cast">Cast</string>
     <string name="similar_movie">Similar Movie</string>
     <string name="watch_trailer">Watch Trailer</string>
