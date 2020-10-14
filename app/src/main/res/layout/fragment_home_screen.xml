@@ -100,6 +100,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:listitem="@layout/item_up_coming_movie" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginVertical="5dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content">
+                <com.google.android.gms.ads.AdView
+                    xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/ad_view_first"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    ads:adSize="LARGE_BANNER"
+                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+
+                </com.google.android.gms.ads.AdView>
+
+            </LinearLayout>
 
 
         </LinearLayout>
@@ -146,6 +165,25 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 tools:listitem="@layout/item_movie" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginVertical="5dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content">
+                <com.google.android.gms.ads.AdView
+                    xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/ad_view_second"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    ads:adSize="LARGE_BANNER"
+                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+
+                </com.google.android.gms.ads.AdView>
+
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -181,6 +219,26 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 tools:listitem="@layout/item_movie" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginVertical="5dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content">
+                <com.google.android.gms.ads.AdView
+                    xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/ad_view_third"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    ads:adSize="LARGE_BANNER"
+                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+
+                </com.google.android.gms.ads.AdView>
+
+            </LinearLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

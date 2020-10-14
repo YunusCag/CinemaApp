@@ -31,7 +31,8 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
 
     private fun initUI() {
         viewLifecycleOwner.lifecycleScope.launch {
-            delay(1000L)
+            delay(4000L)
+            binding.lottiAnimationView.cancelAnimation()
             if(mPref.isFirstTime){
                 navController.navigate(R.id.action_on_board,)
             }else{

@@ -93,7 +93,7 @@ class MovieDetailAdapter : PagingDataAdapter<Movie, MovieDetailAdapter.MovieView
                     val adRequest=AdRequest.Builder()
                         .build()
                     adRequest.isTestDevice(binding.root.context)
-                    adView.loadAd(adRequest)
+                        elementAd.adView.loadAd(adRequest)
                 }else{
                     layoutAd.visibility=View.GONE
                 }

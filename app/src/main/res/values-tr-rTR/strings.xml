@@ -19,10 +19,10 @@
     <string name="similar_movie">Benzer Filmler</string>
     <string name="watch_trailer">Fragmanı izle</string>
     <string name="trailer">Fragman</string>
-    <string name="skip">Skip</string>
+    <string name="skip">Geç</string>
     <string-array name="on_boarding_texts">
-        <item>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</item>
-        <item>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</item>
-        <item>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</item>
+        <item>Bu uygulama The Movie Database sitesinin API si kullanılarak film listeleri ve detayları oluşturuldu.Daha ayrıntılı bilgi için The Movie Database sitesini ziyaret edebilirsiniz.</item>
+        <item>Kullanıcıların filmleri takip edebilmelerini kolaylaştırmak amacıyla uygulamanın arayüzü bu doğrultuda güncellendi.</item>
+        <item>En çok oy alan, sinemada yayınlanacak, popüler ve trend filmleri kaçırmadan takip edebilirsiniz.Sevdiğiniz kategorilerdeki filmleri menü bölümünden seçerek bu kategorilerde bulunan filmleri takip edebilirsiniz. Seçtiğiniz filmlerin fragmanlarını uygulama içerisinden izleyebilirsiniz.</item>
     </string-array>
 </resources>

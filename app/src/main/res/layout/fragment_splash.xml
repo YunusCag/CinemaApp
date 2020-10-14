@@ -6,11 +6,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.splash.SplashFragment">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lotti_animation_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toTopOf="@+id/rainbowTextView"
+        app:lottie_loop="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:lottie_rawRes="@raw/splash_screen_animation"
+        app:lottie_autoPlay="true"
+        app:layout_constraintStart_toStartOf="parent" />
     <com.hanks.htextview.rainbow.RainbowTextView
         android:id="@+id/rainbowTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sinemalog"
+        android:text="@string/app_name"
         android:textSize="28sp"
         android:textAlignment="center"
         android:textStyle="bold"

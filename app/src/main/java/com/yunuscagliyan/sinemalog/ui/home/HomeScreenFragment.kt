@@ -57,9 +57,19 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
     }
 
     private fun initAd() {
+        val adRequest= AdRequest.Builder()
+            .build()
+        adRequest.isTestDevice(requireContext())
         mInterstitial= InterstitialAd(context)
         mInterstitial.adUnitId=AppConstant.INTERSTITIAL_AD_ID
-        mInterstitial.loadAd(AdRequest.Builder().build())
+        mInterstitial.loadAd(adRequest)
+        binding.apply {
+            adViewFirst.loadAd(adRequest)
+            adViewSecond.loadAd(adRequest)
+            adViewThird.loadAd(adRequest)
+        }
+
+
     }
 
     private fun isInterstitialAdShow():Boolean{

@@ -64,7 +64,6 @@ class CreditAdapter : RecyclerView.Adapter<CreditAdapter.CreditMovieViewHolder>(
                     tvMovieOverview.text = "${movie.overview}"
                     tvVoteAverage.text = "${movie.voteAverage}/10"
                 }
-                initializeAd()
                 if (movie.mediaType == "movie") {
                     itemView.setOnClickListener { view ->
                         val extras = FragmentNavigatorExtras(
@@ -78,6 +77,7 @@ class CreditAdapter : RecyclerView.Adapter<CreditAdapter.CreditMovieViewHolder>(
 
                     }
                 }
+                initializeAd()
 
             }
 
@@ -89,7 +89,7 @@ class CreditAdapter : RecyclerView.Adapter<CreditAdapter.CreditMovieViewHolder>(
                     val adRequest= AdRequest.Builder()
                         .build()
                     adRequest.isTestDevice(binding.root.context)
-                    adView.loadAd(adRequest)
+                    elementAd.adView.loadAd(adRequest)
                 }else{
                     layoutAd.visibility= View.GONE
                 }

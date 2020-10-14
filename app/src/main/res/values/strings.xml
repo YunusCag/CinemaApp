@@ -20,8 +20,8 @@
     <string name="trailer">Trailer</string>
     <string name="skip">Skip</string>
     <string-array name="on_boarding_texts">
-    <item>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</item>
-    <item>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</item>
-    <item>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</item>
+    <item>This application has created movie lists and details using the API of The Movie Database site. For more detailed information, you can visit The Movie Database web site.</item>
+    <item>The interface of the application has been updated accordingly in order to enable users to follow the movies.</item>
+    <item>You can follow the most rated, popular and trendy movies that will be published in the cinema. You can follow the movies in these categories from the menu section of the movies in your favorite categories. The trailers will be watched through the movies you have chosen.</item>
 </string-array>
 </resources>

@@ -90,7 +90,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
         val adRequest=AdRequest.Builder()
             .build()
         adRequest.isTestDevice(binding.root.context)
-        binding.adView.loadAd(adRequest)
+        binding.elementAd.adView.loadAd(adRequest)
 
         mInterstitial= InterstitialAd(context)
         mInterstitial.adUnitId=AppConstant.INTERSTITIAL_AD_ID

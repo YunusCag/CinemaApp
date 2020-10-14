@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,8 +9,6 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
         android:layout_margin="4dp"
         app:cardCornerRadius="4dp"
         app:cardUseCompatPadding="false">
@@ -39,7 +35,7 @@
                 android:layout_marginEnd="8dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Movie Name"
+                tools:text="Movie Name"
                 android:textColor="@color/titleTextColor"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -57,7 +53,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:padding="4dp"
-                android:text="6.7/10"
+                tools:text="6.7/10"
                 android:textColor="@android:color/white"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -73,7 +69,7 @@
                 android:layout_marginEnd="8dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="movie"
+                tools:text="movie"
                 android:textColor="@color/titleTextColor"
                 android:textSize="14sp"
                 android:textStyle="normal"
@@ -92,7 +88,7 @@
                 android:layout_marginBottom="8dp"
                 android:ellipsize="end"
                 android:maxLines="4"
-                android:text="Movie Description"
+                tools:text="Movie Description"
                 android:textColor="@color/titleTextColor"
                 android:textSize="14sp"
                 android:textStyle="normal"
@@ -112,17 +108,9 @@
         android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content">
-        <com.google.android.gms.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/adView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            ads:adSize="MEDIUM_RECTANGLE"
-            ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
-        </com.google.android.gms.ads.AdView>
+        <include
+            layout="@layout/element_ad_mob"
+            android:id="@+id/element_ad"/>
 
     </LinearLayout>
 
