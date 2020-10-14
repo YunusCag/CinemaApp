@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yunuscagliyan.sinemalog.MainActivity
 import com.yunuscagliyan.sinemalog.R
@@ -54,6 +56,18 @@ class TopRatedFragment : Fragment(R.layout.fragment_top_rated) {
                 header = HomeLoadStateAdapter{adapter.retry()},
                 footer = HomeLoadStateAdapter{adapter.retry()}
             )
+            buttonRetry.setOnClickListener {
+                adapter.retry()
+            }
+            adapter.addLoadStateListener {loadState->
+                binding.apply {
+                    rvTopRatedMovie.isVisible=loadState.refresh is LoadState.NotLoading
+                    progressBar.isVisible=loadState.refresh is LoadState.Loading
+                    buttonRetry.isVisible=loadState.refresh is LoadState.Error
+                    textViewError.isVisible=loadState.refresh is LoadState.Error
+                }
+
+            }
         }
 
     }

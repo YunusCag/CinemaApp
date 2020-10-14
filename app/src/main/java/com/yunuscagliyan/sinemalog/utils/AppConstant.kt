@@ -27,6 +27,8 @@ class AppConstant {
             "#455A64"
 
         )
+        const val INTERSTITIAL_AD_ID="ca-app-pub-3940256099942544/1033173712"
+        const val CLICK_CONTROL_INITIAL=3
     }
 
 

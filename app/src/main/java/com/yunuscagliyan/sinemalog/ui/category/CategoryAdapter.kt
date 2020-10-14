@@ -5,14 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
 import com.yunuscagliyan.sinemalog.R
 import com.yunuscagliyan.sinemalog.data.models.Genre
 import com.yunuscagliyan.sinemalog.databinding.ItemCategoryBinding
-import com.yunuscagliyan.sinemalog.eventbus.GenreEvent
 import com.yunuscagliyan.sinemalog.utils.AppConstant
-import org.greenrobot.eventbus.EventBus
 import kotlin.random.Random
 
 class CategoryAdapter:RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
@@ -48,7 +45,7 @@ class CategoryAdapter:RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>()
                 view.findNavController().navigate(R.id.category_detail,bundle,null)
 
             }
-            EventBus.getDefault().post(GenreEvent(genre.id!!))
+
         }
     }
 

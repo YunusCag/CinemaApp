@@ -11,7 +11,7 @@
     <string name="settings">Settings</string>
     <string name="turn_on_night_mode">Turn on night mode.</string>
     <string name="retry">Retry</string>
-    <string name="the_movie_lists_could_not_be_loaded">The movie info could not be loaded</string>
+    <string name="the_movie_lists_could_not_be_loaded">The movie list can not be loaded</string>
     <string name="movie_categories">Movie Categories</string>
     <string name="top_rated_movie">Top Rated Movie</string>
     <string name="cast">Cast</string>

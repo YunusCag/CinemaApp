@@ -3,8 +3,10 @@ package com.yunuscagliyan.sinemalog.ui.upcoming
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yunuscagliyan.sinemalog.MainActivity
 import com.yunuscagliyan.sinemalog.R
@@ -51,6 +53,18 @@ class UpComingFragment : Fragment(R.layout.fragment_up_coming) {
                 header = HomeLoadStateAdapter{adapter.retry()},
                 footer = HomeLoadStateAdapter{adapter.retry()}
             )
+            buttonRetry.setOnClickListener {
+                adapter.retry()
+            }
+            adapter.addLoadStateListener {loadState->
+                binding.apply {
+                    rvUpComingMovie.isVisible=loadState.refresh is LoadState.NotLoading
+                    progressBar.isVisible=loadState.refresh is LoadState.Loading
+                    buttonRetry.isVisible=loadState.refresh is LoadState.Error
+                    textViewError.isVisible=loadState.refresh is LoadState.Error
+                }
+
+            }
         }
 
     }

@@ -5,7 +5,9 @@ import android.view.MotionEvent
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yunuscagliyan.sinemalog.MainActivity
@@ -56,6 +58,19 @@ class TrendingMovieFragment : Fragment(R.layout.fragment_trending_movie) {
                 header = HomeLoadStateAdapter{adapter.retry()},
                 footer = HomeLoadStateAdapter{adapter.retry()}
             )
+
+            buttonRetry.setOnClickListener {
+                adapter.retry()
+            }
+            adapter.addLoadStateListener {loadState->
+                binding.apply {
+                    rvTrendingMovie.isVisible=loadState.refresh is LoadState.NotLoading
+                    progressBar.isVisible=loadState.refresh is LoadState.Loading
+                    buttonRetry.isVisible=loadState.refresh is LoadState.Error
+                    textViewError.isVisible=loadState.refresh is LoadState.Error
+                }
+
+            }
         }
 
     }

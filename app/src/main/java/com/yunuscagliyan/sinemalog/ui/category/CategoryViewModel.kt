@@ -1,5 +1,6 @@
 package com.yunuscagliyan.sinemalog.ui.category
 
+import android.util.Log
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
@@ -45,7 +46,7 @@ class CategoryViewModel @ViewModelInject constructor(
     }
 
     companion object {
-        private const val DEFAULT_QUERY = 27
+        private const val DEFAULT_QUERY:Int = -1
     }
 
 

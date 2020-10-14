@@ -70,15 +70,50 @@ class CreditFragment : Fragment(R.layout.fragment_credit) {
         viewModel.creditDataState.observe(viewLifecycleOwner, { state ->
             when (state) {
                 is DataState.Success -> {
+                    binding.apply {
+                        layoutLoading.visibility=View.GONE
+                        rvCreditMovie.visibility=View.VISIBLE
+                    }
+
                     creditResponse = state.data
                     if (creditResponse.person!!.knownFor != null && creditResponse.person!!.knownFor!!.isNotEmpty()) {
                         this.adapter.submitList(state.data.person!!.knownFor!!)
                     }
                     binding.toolbar.title = state.data.person!!.name
-                    binding.toolbarLayout.title=state.data.person!!.name
+                    binding.toolbarLayout.title = state.data.person!!.name
+                }
+                is DataState.Loading -> {
+                    displayProgress()
+                    binding.apply {
+                        rvCreditMovie.visibility=View.GONE
+                    }
+                }
+                is DataState.Error -> {
+                    displayError()
+                    binding.apply {
+                        rvCreditMovie.visibility=View.GONE
+                    }
                 }
             }
         })
+    }
+
+    private fun displayProgress() {
+        binding.apply {
+            layoutLoading.visibility = View.VISIBLE
+            progressBar.visibility = View.VISIBLE
+            buttonRetry.visibility = View.GONE
+            textViewError.visibility = View.GONE
+        }
+    }
+
+    private fun displayError() {
+        binding.apply {
+            layoutLoading.visibility = View.VISIBLE
+            progressBar.visibility = View.GONE
+            textViewError.visibility = View.VISIBLE
+            buttonRetry.visibility = View.VISIBLE
+        }
     }
 
     private fun bindImage(profilePath: String) {
@@ -120,6 +155,15 @@ class CreditFragment : Fragment(R.layout.fragment_credit) {
     private fun initUI() {
         this.adapter = CreditAdapter()
         (activity as MainActivity).setUpToolbar(binding.toolbar)
+        bindUI()
+        binding.apply {
+            buttonRetry.setOnClickListener {
+                bindUI()
+            }
+        }
+    }
+
+    private fun bindUI() {
         bindImage(args.profileURL)
         viewModel.setStateEvent(MovieDetailStateEvent.GetCredit(args.creditId))
     }

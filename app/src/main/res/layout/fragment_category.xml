@@ -38,8 +38,9 @@
             android:layout_height="wrap_content"
             android:text="The movie lists could not be loaded" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_retry"
+            android:backgroundTint="@color/btnTrailer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/retry" />

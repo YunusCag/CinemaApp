@@ -1,6 +1,7 @@
 package com.yunuscagliyan.sinemalog.ui.credit
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
@@ -8,6 +9,7 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.google.android.gms.ads.AdRequest
 import com.yunuscagliyan.sinemalog.R
 import com.yunuscagliyan.sinemalog.data.api.POSTER_BASE_URL
 import com.yunuscagliyan.sinemalog.data.models.CreditResponse
@@ -37,7 +39,7 @@ class CreditAdapter : RecyclerView.Adapter<CreditAdapter.CreditMovieViewHolder>(
         return this.creditList.size
     }
 
-    class CreditMovieViewHolder(val binding: ItemCreditMovieBinding) :
+    inner class CreditMovieViewHolder(val binding: ItemCreditMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bindMovie(movie: CreditResponse.Person.KnownFor) {
@@ -62,6 +64,7 @@ class CreditAdapter : RecyclerView.Adapter<CreditAdapter.CreditMovieViewHolder>(
                     tvMovieOverview.text = "${movie.overview}"
                     tvVoteAverage.text = "${movie.voteAverage}/10"
                 }
+                initializeAd()
                 if (movie.mediaType == "movie") {
                     itemView.setOnClickListener { view ->
                         val extras = FragmentNavigatorExtras(
@@ -78,6 +81,23 @@ class CreditAdapter : RecyclerView.Adapter<CreditAdapter.CreditMovieViewHolder>(
 
             }
 
+        }
+        private fun initializeAd() {
+            binding.apply {
+                if(isAdShow()){
+                    layoutAd.visibility= View.VISIBLE
+                    val adRequest= AdRequest.Builder()
+                        .build()
+                    adRequest.isTestDevice(binding.root.context)
+                    adView.loadAd(adRequest)
+                }else{
+                    layoutAd.visibility= View.GONE
+                }
+            }
+        }
+
+        private fun isAdShow():Boolean{
+            return absoluteAdapterPosition==itemCount-1
         }
     }
 

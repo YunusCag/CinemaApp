@@ -1,6 +1,7 @@
 package com.yunuscagliyan.sinemalog.ui.category
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -33,14 +34,21 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
 
     private fun initUI() {
         (activity as MainActivity).setUpToolbar(binding.toolbar)
+
         viewModel.setStateEvent(CategoryEventState.GetGenreList)
         binding.apply {
             val layoutManager =
                 LinearLayoutManager(
-                    context, LinearLayoutManager.VERTICAL,false)
+                    context, LinearLayoutManager.VERTICAL, false
+                )
             rvGenreList.setHasFixedSize(true)
-            rvGenreList.layoutManager=layoutManager
-            rvGenreList.adapter=adapter
+            rvGenreList.layoutManager = layoutManager
+            rvGenreList.adapter = adapter
+
+            buttonRetry.setOnClickListener {
+                viewModel.setStateEvent(CategoryEventState.GetGenreList)
+
+            }
 
         }
 
@@ -83,19 +91,6 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun getGenreMovieList(genre:GenreEvent){
-        viewModel.getGenreMovies(genre.genreId)
-    }
-    override fun onStart() {
-        super.onStart()
-        EventBus.getDefault().register(this)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        EventBus.getDefault().unregister(this)
-    }
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

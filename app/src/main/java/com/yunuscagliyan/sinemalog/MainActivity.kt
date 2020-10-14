@@ -12,6 +12,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import com.google.android.gms.ads.MobileAds
 import com.yunuscagliyan.sinemalog.databinding.ActivityMainBinding
 import com.yunuscagliyan.sinemalog.utils.SharedPref
 import com.yunuscagliyan.sinemalog.utils.ThemeHelper
@@ -30,9 +31,14 @@ class MainActivity : AppCompatActivity() {
 
         initTheme()
         initUI()
+        initAdmob()
         setUpDestinationChangeListener()
         setUpSideNavMenu()
 
+    }
+
+    private fun initAdmob() {
+        MobileAds.initialize(this)
     }
 
     private fun initTheme() {
@@ -70,7 +76,7 @@ class MainActivity : AppCompatActivity() {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
 
                 super.onDrawerSlide(drawerView, slideOffset)
-                var slideX:Float=drawerView.width*slideOffset
+                val slideX:Float=drawerView.width*slideOffset
                 binding.contentLayout.translationX=slideX
                 binding.contentLayout.scaleX=(1-(slideOffset/scaleFactor))
                 binding.contentLayout.scaleY=(1-(slideOffset/scaleFactor))

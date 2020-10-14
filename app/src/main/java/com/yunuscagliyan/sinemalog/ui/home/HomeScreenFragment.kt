@@ -1,20 +1,27 @@
 package com.yunuscagliyan.sinemalog.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.mediation.customevent.CustomEventInterstitial
 import com.yunuscagliyan.sinemalog.MainActivity
 import com.yunuscagliyan.sinemalog.R
 import com.yunuscagliyan.sinemalog.databinding.FragmentHomeScreenBinding
 import com.yunuscagliyan.sinemalog.ui.adapters.HomeLoadStateAdapter
 import com.yunuscagliyan.sinemalog.ui.adapters.MovieDetailAdapter
+import com.yunuscagliyan.sinemalog.utils.AppConstant
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -32,12 +39,16 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
     private lateinit var trendingAdapter: MovieAdapter
     private lateinit var topRatedAdapter:MovieAdapter
     private lateinit var navController: NavController
+    private lateinit var mInterstitial: InterstitialAd
 
+    private var clickCount=AppConstant.CLICK_CONTROL_INITIAL
+    private var isAdShow=false
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentHomeScreenBinding.bind(view)
         navController=Navigation.findNavController(view)
         initUI()
+        initAd()
         initUpComingObserve()
         initPopularObserve()
         initTrendingObserve()
@@ -45,7 +56,26 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
 
     }
 
+    private fun initAd() {
+        mInterstitial= InterstitialAd(context)
+        mInterstitial.adUnitId=AppConstant.INTERSTITIAL_AD_ID
+        mInterstitial.loadAd(AdRequest.Builder().build())
+    }
 
+    private fun isInterstitialAdShow():Boolean{
+        return mInterstitial.isLoaded&&isAdShow
+    }
+
+    private fun decreaseControl(){
+        this.clickCount-=1
+        Log.e("TAG","Click count:$clickCount")
+        if(this.clickCount==0){
+            this.isAdShow=true
+            this.clickCount=AppConstant.CLICK_CONTROL_INITIAL
+        }else{
+            this.isAdShow=false
+        }
+    }
 
     private fun initUI() {
         (activity as MainActivity).setUpToolbar(binding.toolbar)
@@ -55,17 +85,31 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
         initTopRatedMovies()
         binding.apply {
             tvPopular.setOnClickListener {
+                showInterstitialAd()
                 navController.navigate(HomeScreenFragmentDirections.popularViewAll())
+                decreaseControl()
             }
             tvTrending.setOnClickListener {
+                showInterstitialAd()
                 navController.navigate(HomeScreenFragmentDirections.trendingViewAll())
+                decreaseControl()
             }
             tvUpcoming.setOnClickListener {
+                showInterstitialAd()
                 navController.navigate(HomeScreenFragmentDirections.upComingViewAll())
+                decreaseControl()
             }
             tvTopRated.setOnClickListener {
+                showInterstitialAd()
                 navController.navigate(HomeScreenFragmentDirections.topRatedViewAll())
+                decreaseControl()
             }
+        }
+    }
+
+    private fun showInterstitialAd() {
+        if (isInterstitialAdShow()) {
+            mInterstitial.show()
         }
     }
 
@@ -106,6 +150,22 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
                 header = HomeLoadStateAdapter{popularAdapter.retry()},
                 footer = HomeLoadStateAdapter{popularAdapter.retry()}
             )
+            buttonRetry.setOnClickListener {
+                popularAdapter.retry()
+                upComingAdapter.retry()
+                topRatedAdapter.retry()
+                trendingAdapter.retry()
+
+            }
+            popularAdapter.addLoadStateListener {loadState->
+                binding.apply {
+                    rvPopularMovie.isVisible=loadState.refresh is LoadState.NotLoading
+                    progressBar.isVisible=loadState.refresh is LoadState.Loading
+                    buttonRetry.isVisible=loadState.refresh is LoadState.Error
+                    textViewError.isVisible=loadState.refresh is LoadState.Error
+                }
+
+            }
         }
 
     }
@@ -120,9 +180,18 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
                 startPostponedEnterTransition()
             }
             rvTopRatedMovie.adapter = topRatedAdapter.withLoadStateHeaderAndFooter(
-                header = HomeLoadStateAdapter{popularAdapter.retry()},
-                footer = HomeLoadStateAdapter{popularAdapter.retry()}
+                header = HomeLoadStateAdapter{topRatedAdapter.retry()},
+                footer = HomeLoadStateAdapter{topRatedAdapter.retry()}
             )
+            topRatedAdapter.addLoadStateListener {loadState->
+                binding.apply {
+                    rvTopRatedMovie.isVisible=loadState.refresh is LoadState.NotLoading
+                    progressBar.isVisible=loadState.refresh is LoadState.Loading
+                    buttonRetry.isVisible=loadState.refresh is LoadState.Error
+                    textViewError.isVisible=loadState.refresh is LoadState.Error
+                }
+
+            }
         }
     }
 
@@ -143,6 +212,15 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
                 header = HomeLoadStateAdapter{upComingAdapter.retry()},
                 footer = HomeLoadStateAdapter{upComingAdapter.retry()}
             )
+            upComingAdapter.addLoadStateListener {loadState->
+                binding.apply {
+                    rvUpComingMovie.isVisible=loadState.refresh is LoadState.NotLoading
+                    progressBar.isVisible=loadState.refresh is LoadState.Loading
+                    buttonRetry.isVisible=loadState.refresh is LoadState.Error
+                    textViewError.isVisible=loadState.refresh is LoadState.Error
+                }
+
+            }
         }
 
     }
@@ -161,6 +239,15 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
                 header = HomeLoadStateAdapter{trendingAdapter.retry()},
                 footer = HomeLoadStateAdapter{trendingAdapter.retry()}
             )
+            trendingAdapter.addLoadStateListener {loadState->
+                binding.apply {
+                    rvTrendingMovie.isVisible=loadState.refresh is LoadState.NotLoading
+                    progressBar.isVisible=loadState.refresh is LoadState.Loading
+                    buttonRetry.isVisible=loadState.refresh is LoadState.Error
+                    textViewError.isVisible=loadState.refresh is LoadState.Error
+                }
+
+            }
         }
     }
 

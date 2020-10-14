@@ -12,7 +12,7 @@
     <string name="settings">Ayarlar</string>
     <string name="turn_on_night_mode">Gece modunu aç.</string>
     <string name="retry">Yeniden Deneyin</string>
-    <string name="the_movie_lists_could_not_be_loaded">Film bilgisiyi yüklenirken hata oluştu</string>
+    <string name="the_movie_lists_could_not_be_loaded">Film bilgilerini yüklerken bir hata oluştu.</string>
     <string name="movie_categories">Film Kategorileri</string>
     <string name="top_rated_movie">En Çok Oy Alan Filmler</string>
     <string name="cast">Oyuncular</string>

@@ -89,6 +89,9 @@ dependencies {
     implementation 'com.github.PierfrancescoSoffritti:AndroidYouTubePlayer:7.0.1'
     //Dots
     implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
+    //Admob
+    implementation 'com.google.android.gms:play-services-ads:19.4.0'
+
 
 
 

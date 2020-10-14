@@ -23,6 +23,7 @@ class TrailerFragment : Fragment(R.layout.fragment_trailer) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding= FragmentTrailerBinding.bind(view)
+        lifecycle.addObserver(binding.youtubePlayerView)
         initUI()
         initTrailerObserve()
     }

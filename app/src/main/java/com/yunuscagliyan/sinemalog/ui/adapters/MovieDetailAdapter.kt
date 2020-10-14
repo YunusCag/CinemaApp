@@ -1,6 +1,7 @@
 package com.yunuscagliyan.sinemalog.ui.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
@@ -10,6 +11,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import com.yunuscagliyan.sinemalog.R
 import com.yunuscagliyan.sinemalog.data.api.POSTER_BASE_URL
 import com.yunuscagliyan.sinemalog.data.models.Movie
@@ -19,6 +22,7 @@ import java.text.SimpleDateFormat
 
 class MovieDetailAdapter : PagingDataAdapter<Movie, MovieDetailAdapter.MovieViewHolder>(MOVIE_COMPARATOR) {
 
+    private lateinit var mInterstitial: InterstitialAd
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -48,6 +52,7 @@ class MovieDetailAdapter : PagingDataAdapter<Movie, MovieDetailAdapter.MovieView
         }
     }
 
+
     class MovieViewHolder(private val binding: ItemMovieDetailBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -69,6 +74,7 @@ class MovieDetailAdapter : PagingDataAdapter<Movie, MovieDetailAdapter.MovieView
                 val date=getDateInstance().format(releaseDate)
                 tvYear.text=date
             }
+            initializeAd()
             itemView.setOnClickListener {view->
                 val extras= FragmentNavigatorExtras(
                     binding.ivMoviePoster to moviePosterURL,
@@ -78,6 +84,24 @@ class MovieDetailAdapter : PagingDataAdapter<Movie, MovieDetailAdapter.MovieView
                 view.findNavController().navigate(R.id.action_movie_detail,bundle,null,extras)
 
             }
+        }
+
+        private fun initializeAd() {
+            binding.apply {
+                if(isAdShow()){
+                    layoutAd.visibility=View.VISIBLE
+                    val adRequest=AdRequest.Builder()
+                        .build()
+                    adRequest.isTestDevice(binding.root.context)
+                    adView.loadAd(adRequest)
+                }else{
+                    layoutAd.visibility=View.GONE
+                }
+            }
+        }
+
+        fun isAdShow():Boolean{
+            return absoluteAdapterPosition%10==0
         }
     }
 }

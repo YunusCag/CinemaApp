@@ -2,6 +2,7 @@ package com.yunuscagliyan.sinemalog.ui.movie_detail
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -18,12 +19,15 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import com.yunuscagliyan.sinemalog.MainActivity
 import com.yunuscagliyan.sinemalog.R
 import com.yunuscagliyan.sinemalog.data.models.MovieDetail
 import com.yunuscagliyan.sinemalog.databinding.FragmentMovieDetailBinding
 import com.yunuscagliyan.sinemalog.ui.adapters.HomeLoadStateAdapter
 import com.yunuscagliyan.sinemalog.ui.home.MovieAdapter
+import com.yunuscagliyan.sinemalog.utils.AppConstant
 import com.yunuscagliyan.sinemalog.utils.DataState
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.DateFormat
@@ -40,6 +44,8 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
     private lateinit var navController: NavController
     private val castAdapter = CastAdapter()
     private val movieAdapter = MovieAdapter()
+    private lateinit var mInterstitial: InterstitialAd
+
 
     private fun setUpShareAnimation() {
         sharedElementEnterTransition =
@@ -63,6 +69,8 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
         initCastList()
         initSimilarMovieList()
 
+        initAd()
+
     }
     private fun initSimilarMovieList() {
         binding.apply {
@@ -78,6 +86,17 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
             )
         }
     }
+    private fun initAd() {
+        val adRequest=AdRequest.Builder()
+            .build()
+        adRequest.isTestDevice(binding.root.context)
+        binding.adView.loadAd(adRequest)
+
+        mInterstitial= InterstitialAd(context)
+        mInterstitial.adUnitId=AppConstant.INTERSTITIAL_AD_ID
+        mInterstitial.loadAd(adRequest)
+    }
+
 
     private fun initSimilarMovieObserve() {
         viewModel.getSimilarMovie(args.movieId).observe(viewLifecycleOwner, {
@@ -102,12 +121,21 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
         viewModel.detailDataState.observe(viewLifecycleOwner, { dataState ->
             when (dataState) {
                 is DataState.Success -> {
+                    binding.apply {
+                        layoutBottom.visibility=View.VISIBLE
+                    }
                     bindUI(dataState.data)
                 }
                 is DataState.Error -> {
+                    binding.apply {
+                        layoutBottom.visibility=View.GONE
+                    }
                     displayError()
                 }
                 is DataState.Loading -> {
+                    binding.apply {
+                        layoutBottom.visibility=View.GONE
+                    }
                     displayProgress()
                 }
             }
@@ -137,6 +165,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
             progressBar.visibility = View.GONE
             textViewError.visibility = View.VISIBLE
             buttonRetry.visibility = View.VISIBLE
+            ivMoviePoster.setImageResource(R.drawable.cinema_icon)
         }
     }
 
@@ -196,12 +225,20 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
     private fun initUI() {
         (activity as MainActivity).setUpToolbar(binding.toolbar)
         binding.btnNavigateTrailer.setOnClickListener {
+            if(mInterstitial.isLoaded){
+                mInterstitial.show()
+            }
             val bundle= bundleOf("movieId" to args.movieId)
             this.navController.navigate(R.id.action_trailer,bundle)
         }
         binding.apply {
             buttonRetry.setOnClickListener {
-                viewModel.setStateEvent(MovieDetailStateEvent.GetMovieDetail(args.movieId))
+                gettingMovieDetail()
+                if(mInterstitial.isLoaded){
+                    mInterstitial.show()
+                }
+                initAd()
+                initSimilarMovieObserve()
             }
         }
     }
