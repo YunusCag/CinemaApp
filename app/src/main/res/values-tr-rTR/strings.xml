@@ -30,4 +30,7 @@
     <string name="rate_dialog_possitive">Evet</string>
     <string name="unable_find_market_app">Google Play market uygulaması bulunamadı.</string>
     <string name="no_internet_connection">Lütfen internet bağlantınızı kontrol edin.</string>
+    <string name="notification_name">Uygulama hatırlatma</string>
+    <string name="notification_title">Sinemalog Bildirimi</string>
+    <string name="notification_content">Gişedeki filmlere göz attın mı?Bakmak için tıklayın</string>
 </resources>

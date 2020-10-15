@@ -42,6 +42,7 @@ class SettingFragment : Fragment(R.layout.fragment_setting) {
             mPref.nightMode = isChecked
             (activity as MainActivity).recreate()
         }
+
     }
     override fun onDestroy() {
         super.onDestroy()
