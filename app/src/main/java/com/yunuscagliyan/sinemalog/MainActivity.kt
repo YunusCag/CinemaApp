@@ -67,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         binding.navigationDrawer.let {
             NavigationUI.setupWithNavController(it,navController)
         }
+        binding.navigationDrawer.itemIconTintList = null
         //Side Design SetUp
         var actionBarDrawerToggle=object: ActionBarDrawerToggle(this,
             binding.navigationLayout,null,

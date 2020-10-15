@@ -6,12 +6,12 @@
         <item
             android:id="@+id/destination_home"
             android:checkable="true"
-            android:icon="@drawable/movie_icon"
+            android:icon="@drawable/ic_cinema_screen"
             android:title="@string/home_page" />
         <item
             android:id="@+id/destination_category"
             android:checkable="true"
-            android:icon="@drawable/tv_icon"
+            android:icon="@drawable/cinema_icon"
             android:title="@string/movie_categories" />
         <group
             android:id="@+id/menu_movie"
@@ -19,22 +19,22 @@
             <item
                 android:id="@+id/destination_up_coming"
                 android:checkable="true"
-                android:icon="@drawable/movie_icon"
+                android:icon="@drawable/ic_pop_corn"
                 android:title="@string/up_coming_movie" />
             <item
                 android:id="@+id/destination_trending"
                 android:checkable="true"
-                android:icon="@drawable/cinema_icon"
+                android:icon="@drawable/ic_trending"
                 android:title="@string/trending_movie" />
             <item
                 android:id="@+id/destination_popular"
                 android:checkable="true"
-                android:icon="@drawable/tv_icon"
+                android:icon="@drawable/ic_popular"
                 android:title="@string/popular_movie" />
             <item
                 android:id="@+id/destination_top_rated"
                 android:checkable="true"
-                android:icon="@drawable/cinema_icon"
+                android:icon="@drawable/ic_top_rated"
                 android:title="@string/top_rated_movie" />
 
         </group>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Sinemalog</string>
-    <string name="up_coming_movie">Yayınlanacak Filmler</string>
+    <string name="up_coming_movie">Yakında Sinemalarda</string>
     <string name="view_all">Hepsini Gör</string>
-    <string name="trending_movie">Trend Filmler</string>
-    <string name="popular_movie">Popüler Filmler</string>
+    <string name="trending_movie">Trend</string>
+    <string name="popular_movie">Popüler</string>
     <string name="release_date">Yayınlanma Tarihi:</string>
     <string name="overview">Film Özeti</string>
     <string name="minutes">dakika</string>
@@ -13,8 +13,8 @@
     <string name="turn_on_night_mode">Gece modunu aç.</string>
     <string name="retry">Yeniden Deneyin</string>
     <string name="the_movie_lists_could_not_be_loaded">Film bilgilerini yüklerken bir hata oluştu.</string>
-    <string name="movie_categories">Film Kategorileri</string>
-    <string name="top_rated_movie">En Çok Oy Alan Filmler</string>
+    <string name="movie_categories">Kategoriler</string>
+    <string name="top_rated_movie">En Çok Oy Alanlar</string>
     <string name="cast">Oyuncular</string>
     <string name="similar_movie">Benzer Filmler</string>
     <string name="watch_trailer">Fragmanı izle</string>
