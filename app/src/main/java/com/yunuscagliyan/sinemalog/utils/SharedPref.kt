@@ -13,6 +13,7 @@ class SharedPref @Inject constructor(@ApplicationContext context: Context) {
         const val SHARED_PREFERENCE_FILE_NAME = "sinemalog"
         const val THEME_STATE_KEY = "DARK_MODE"
         const val FIRST_TIME_OPENING = "FIRST_TIME_OPENING"
+        const val APP_RATED = "APP_RATED"
     }
 
     init {
@@ -38,9 +39,21 @@ class SharedPref @Inject constructor(@ApplicationContext context: Context) {
                 FIRST_TIME_OPENING, true
             )
         }
-    set(value:Boolean) {
-        val editor=mSharedPreferences.edit()
-        editor.putBoolean(FIRST_TIME_OPENING,value)
-        editor.apply()
-    }
+        set(value: Boolean) {
+            val editor = mSharedPreferences.edit()
+            editor.putBoolean(FIRST_TIME_OPENING, value)
+            editor.apply()
+        }
+
+    var isAppRated: Boolean
+        get() {
+            return mSharedPreferences.getBoolean(
+                APP_RATED, false
+            )
+        }
+        set(value: Boolean) {
+            val editor = mSharedPreferences.edit()
+            editor.putBoolean(APP_RATED, value)
+            editor.apply()
+        }
 }

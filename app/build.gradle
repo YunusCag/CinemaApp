@@ -5,15 +5,15 @@ apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'dagger.hilt.android.plugin'
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.yunuscagliyan.sinemalog"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName "2.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -94,6 +94,9 @@ dependencies {
 
     //Lottie Animation
     implementation "com.airbnb.android:lottie:$lottieVersion"
+    //Material Dialog
+    implementation 'com.shreyaspatil:MaterialDialog:2.1'
+
 
 
 

@@ -24,4 +24,9 @@
     <item>The interface of the application has been updated accordingly in order to enable users to follow the movies.</item>
     <item>You can follow the most rated, popular and trendy movies that will be published in the cinema. You can follow the movies in these categories from the menu section of the movies in your favorite categories. The trailers will be watched through the movies you have chosen.</item>
 </string-array>
+    <string name="app_rated_dialog">Did you like the application? Rate the application on Google Play Store</string>
+    <string name="rate_dialog_negative">No</string>
+    <string name="rate_dialog_possitive">Yes</string>
+    <string name="unable_find_market_app">Unable to find market app</string>
+    <string name="no_internet_connection">There is no internet connection.Check the internet connection.</string>
 </resources>

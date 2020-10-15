@@ -25,6 +25,7 @@ class SettingFragment : Fragment(R.layout.fragment_setting) {
         initAd()
     }
 
+
     private fun initAd() {
         val adRequest= AdRequest.Builder()
             .build()

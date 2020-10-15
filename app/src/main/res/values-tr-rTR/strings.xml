@@ -25,4 +25,9 @@
         <item>Kullanıcıların filmleri takip edebilmelerini kolaylaştırmak amacıyla uygulamanın arayüzü bu doğrultuda güncellendi.</item>
         <item>En çok oy alan, sinemada yayınlanacak, popüler ve trend filmleri kaçırmadan takip edebilirsiniz.Sevdiğiniz kategorilerdeki filmleri menü bölümünden seçerek bu kategorilerde bulunan filmleri takip edebilirsiniz. Seçtiğiniz filmlerin fragmanlarını uygulama içerisinden izleyebilirsiniz.</item>
     </string-array>
+    <string name="app_rated_dialog">Uygulamayı sevdin mi ? Uygulamayı Google Play Storeda değerlendirmeye ne dersin?.</string>
+    <string name="rate_dialog_negative">Hayır</string>
+    <string name="rate_dialog_possitive">Evet</string>
+    <string name="unable_find_market_app">Google Play market uygulaması bulunamadı.</string>
+    <string name="no_internet_connection">Lütfen internet bağlantınızı kontrol edin.</string>
 </resources>
