@@ -29,7 +29,4 @@
     <string name="rate_dialog_possitive">Yes</string>
     <string name="unable_find_market_app">Unable to find market app</string>
     <string name="no_internet_connection">There is no internet connection.Check the internet connection.</string>
-    <string name="notification_name">Remind user the app</string>
-    <string name="notification_title">Sinemalog Notification</string>
-    <string name="notification_content">Hey Did you look at the box office movies?Click to see</string>
 </resources>
