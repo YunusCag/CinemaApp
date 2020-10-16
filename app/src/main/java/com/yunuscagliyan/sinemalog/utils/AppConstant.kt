@@ -27,9 +27,10 @@ class AppConstant {
             "#455A64"
 
         )
-        const val INTERSTITIAL_AD_ID="ca-app-pub-3940256099942544/1033173712"
+        const val INTERSTITIAL_AD_ID="ca-app-pub-6443751293383131/1299780868"
         const val CLICK_CONTROL_INITIAL=3
         const val SHOW_APP_RATE_DIALOG_CONTROL=15
+        const val CHANNEL_ID="channelID_CinemaApp"
     }
 
 

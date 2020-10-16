@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Sinemalog</string>
+    <string name="app_name">CinemaApp</string>
     <string name="up_coming_movie">Yakında Sinemalarda</string>
     <string name="view_all">Hepsini Gör</string>
     <string name="trending_movie">Trend</string>
@@ -30,4 +30,10 @@
     <string name="rate_dialog_possitive">Evet</string>
     <string name="unable_find_market_app">Google Play market uygulaması bulunamadı.</string>
     <string name="no_internet_connection">Lütfen internet bağlantınızı kontrol edin.</string>
+    <string name="movie_detail_page">Film Detay Sayfası</string>
+    <string name="categories_page">Kategoriler Sayfası</string>
+    <string name="credit">Credit</string>
+    <string name="notification_name">Uygulama hatırlatma</string>
+    <string name="notification_title">CinemaApp Bildirimi</string>
+    <string name="notification_content">Hey Did you look at the box office movies?Click to see</string>
 </resources>

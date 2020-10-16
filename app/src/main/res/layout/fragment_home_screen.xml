@@ -114,7 +114,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center_horizontal"
                     ads:adSize="LARGE_BANNER"
-                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+                    ads:adUnitId="ca-app-pub-6443751293383131/6400064302">
 
                 </com.google.android.gms.ads.AdView>
 
@@ -179,7 +179,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center_horizontal"
                     ads:adSize="LARGE_BANNER"
-                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+                    ads:adUnitId="ca-app-pub-6443751293383131/6400064302">
 
                 </com.google.android.gms.ads.AdView>
 
@@ -233,7 +233,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center_horizontal"
                     ads:adSize="LARGE_BANNER"
-                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+                    ads:adUnitId="ca-app-pub-6443751293383131/6400064302">
 
                 </com.google.android.gms.ads.AdView>
 

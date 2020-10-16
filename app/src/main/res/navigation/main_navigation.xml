@@ -98,7 +98,7 @@
     <fragment
         android:id="@+id/movieDetailFragment"
         android:name="com.yunuscagliyan.sinemalog.ui.movie_detail.MovieDetailFragment"
-        android:label="Movie Detail Page"
+        android:label="@string/movie_detail_page"
         tools:layout="@layout/fragment_movie_detail">
         <argument
             android:name="movieId"
@@ -127,7 +127,7 @@
     <fragment
         android:id="@+id/destination_category"
         android:name="com.yunuscagliyan.sinemalog.ui.category.CategoryFragment"
-        android:label="Categories Page"
+        android:label="@string/categories_page"
         tools:layout="@layout/fragment_category" >
         <action
             android:id="@+id/category_detail"
@@ -179,7 +179,7 @@
     <fragment
         android:id="@+id/creditFragment"
         android:name="com.yunuscagliyan.sinemalog.ui.credit.CreditFragment"
-        android:label="Credit"
+        android:label="@string/credit"
         tools:layout="@layout/fragment_credit">
         <action
             android:id="@+id/action_movie_detail"

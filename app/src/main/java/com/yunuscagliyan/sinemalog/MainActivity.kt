@@ -1,5 +1,7 @@
 package com.yunuscagliyan.sinemalog
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -25,16 +27,19 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.shreyaspatil.MaterialDialog.AbstractDialog
 import com.shreyaspatil.MaterialDialog.MaterialDialog
 import com.yunuscagliyan.sinemalog.databinding.ActivityMainBinding
+import com.yunuscagliyan.sinemalog.services.NotificationBroadcast
 import com.yunuscagliyan.sinemalog.utils.AppConstant
 import com.yunuscagliyan.sinemalog.utils.SharedPref
 import com.yunuscagliyan.sinemalog.utils.ThemeHelper
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
+    val NOTIFICATION_BROADCAST=100
     @Inject
     lateinit var mPref: SharedPref
 
@@ -49,6 +54,21 @@ class MainActivity : AppCompatActivity() {
         initAdmob()
         setUpDestinationChangeListener()
         setUpSideNavMenu()
+        setUpNotification()
+    }
+
+    private fun setUpNotification() {
+        val alarmManager=getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val notificationIntent=Intent(this,NotificationBroadcast::class.java)
+        val broadcast= PendingIntent
+            .getBroadcast(this,NOTIFICATION_BROADCAST,notificationIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val calendar= Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY,19)
+        calendar.set(Calendar.MINUTE,15)
+        alarmManager.setRepeating(AlarmManager.RTC,calendar.timeInMillis,
+            AlarmManager.INTERVAL_DAY,broadcast)
+
     }
 
     private fun initAdmob() {
