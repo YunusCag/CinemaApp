@@ -1,5 +1,7 @@
 package com.yunuscagliyan.sinemalog
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -10,7 +12,6 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -21,7 +22,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.google.android.gms.ads.MobileAds
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.shreyaspatil.MaterialDialog.AbstractDialog
 import com.shreyaspatil.MaterialDialog.MaterialDialog
 import com.yunuscagliyan.sinemalog.databinding.ActivityMainBinding
@@ -29,12 +29,14 @@ import com.yunuscagliyan.sinemalog.utils.AppConstant
 import com.yunuscagliyan.sinemalog.utils.SharedPref
 import com.yunuscagliyan.sinemalog.utils.ThemeHelper
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
+    val NOTIFICATION_BROADCAST=100
     @Inject
     lateinit var mPref: SharedPref
 
@@ -49,6 +51,24 @@ class MainActivity : AppCompatActivity() {
         initAdmob()
         setUpDestinationChangeListener()
         setUpSideNavMenu()
+        initWorkManager()
+
+    }
+
+    private fun initWorkManager() {
+
+        val alarmManager=getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val notificationIntent=Intent("android.media.action.DISPLAY_NOTIFICATION")
+        notificationIntent.addCategory("android.intent.category.DEFAULT")
+        val broadcast=PendingIntent
+            .getBroadcast(this,NOTIFICATION_BROADCAST,notificationIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val calendar= Calendar.getInstance()
+        calendar.add(Calendar.MINUTE,15)
+        alarmManager.setRepeating(AlarmManager.RTC,calendar.timeInMillis,
+        AlarmManager.INTERVAL_DAY,broadcast)
+
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP,calendar.timeInMillis,broadcast)
     }
 
     private fun initAdmob() {
@@ -214,7 +234,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration)
     }
-
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(
             navController,
