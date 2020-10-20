@@ -1,6 +1,6 @@
 # CinemaApp
 Bu uygulamayı Google Play'de deneyimleyebilirsiniz.
-<a class="btn btn-success" href:"https://play.google.com/store/apps/details?id=com.yunuscagliyan.cinemaapp">Uygulamayı indir.</a>
+Link:https://play.google.com/store/apps/details?id=com.yunuscagliyan.cinemaapp
 
 Bu uygulama oluşturulurken aşağıdaki yapılar kullanıldı.
 -Retrofit 2
